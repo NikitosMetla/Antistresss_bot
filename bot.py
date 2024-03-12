@@ -29,7 +29,7 @@ from handlers.days.day8 import day_router8
 from handlers.days.day9 import day_router9
 from handlers.user_handlers import user_router
 from keyboards import confirm_keyboard
-from settings import storage, days_start_questions
+from settings import storage, days_start_questions, bot_token
 
 bot = Bot(token=bot_token, parse_mode="html")
 
