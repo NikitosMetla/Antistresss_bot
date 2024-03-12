@@ -3,7 +3,6 @@ import os
 from aiogram import Bot, Dispatcher
 from aiogram.fsm.state import StatesGroup, State
 from aiogram.fsm.storage.memory import MemoryStorage
-from dotenv import load_dotenv
 
 bot = Bot(token="7127073385:AAFmxPDok0-oRAU9RcPJNPfLNW1DnWfRZlU", parse_mode="html")
 storage = MemoryStorage()
