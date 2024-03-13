@@ -22,7 +22,7 @@ day_router14 = Router()
 async def start_day14(message: types.CallbackQuery, state: FSMContext, bot: Bot):
     if int(await Users_stat(message.from_user.id).get_user_day()) == int(message.data.split("|")[1]):
         await state.clear()
-        await message.message.answer("Очень простые и где-то даже тривиальные вещи, к которым мы зачастую относимся несерьезно. На прошлой неделе ты занимался тем, что обращал "
+        question = message.message.answer("Очень простые и где-то даже тривиальные вещи, к которым мы зачастую относимся несерьезно. На прошлой неделе ты занимался тем, что обращал "
                                      "внимание на то, что у тебя вызывает напряжение. Посмотри, можешь ли избавиться от этих стресс-факторов или минимизировать их? Не отмахивайся от этого вопроса. "
                                      "Посмотри внимательно. Попробуй быть креативным. Может быть тебе не обязательно встречаться/созваниваться с раздражающим тебя коллегой и можно договориться "
                                      "взаимодействовать в другом формате, например, подробно расписывать что-либо\n"
@@ -30,13 +30,18 @@ async def start_day14(message: types.CallbackQuery, state: FSMContext, bot: Bot)
                                      "Может можно найти в интернет-магазине сломанную деталь и заменить её? Это ведь не займёт много времени\n"
                                      "Выпиши сейчас причины напряжения и то, какие шаги ты предпримешь, чтобы убрать/минимизировать их:")
         await state.set_state(InputMessage.input_answer_state14_1)
+        await state.update_data(question=question.text)
 
 
 @day_router14.message(F.text, InputMessage.input_answer_state14_1)
 @is_now_day(14)
 async def answer_day14_1(message: types.Message, state: FSMContext, bot: Bot):
+    data = await state.get_data()
+    question = data.get("question")
+    answers = Answers()
+    await answers.add_answer(question=question, answer=message.text, user_id=message.from_user.id)
     await message.answer_sticker(sticker=sticker_ids[0])
-    await message.answer("Отлично! Так их))\n\n"
+    question = await message.answer("Отлично! Так их))\n\n"
                          "Следующим пунктом, самым банальным из банальных, но крайне важным, является налаженные питьевой режим и режим питания. "
                          "Убегаешь с утра не позавтракав? Пропускаешь обед или ужин, вместо этого жуя сэндвич по дороге? "
                          "Отмахиваешься от жажды из-за того, что всё время забываешь купить воды с собой в университет? Поставь напоминание. "
@@ -45,11 +50,16 @@ async def answer_day14_1(message: types.Message, state: FSMContext, bot: Bot):
                          "начинаем медленнее соображать, а сил становится всё меньше. Просто в какой-то день раз и сил ни на что нет\n"
                          "Итак, какой маленький шаг ты можешь предпринять уже сегодня, чтобы улучшить питьевой режим или режим питания?")
     await state.set_state(InputMessage.input_answer_state14_2)
+    await state.update_data(question=question.text)
 
 
 @day_router14.message(F.text, InputMessage.input_answer_state14_2)
 @is_now_day(14)
 async def answer_day14_2(message: types.Message, state: FSMContext, bot: Bot):
+    data = await state.get_data()
+    question = data.get("question")
+    answers = Answers()
+    await answers.add_answer(question=question, answer=message.text, user_id=message.from_user.id)
     await state.clear()
     keyboard = InlineKeyboardBuilder()
     keyboard.row(InlineKeyboardButton(text="Иду делать", callback_data="Start_doing|14"))
