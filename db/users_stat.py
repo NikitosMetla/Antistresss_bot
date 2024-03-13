@@ -65,7 +65,7 @@ class Users_stat:
         next_day = int(self.users.get(self.user_id).get('day_now')) + 1
         self.users[self.user_id]["day_now"] = next_day
         self.users[self.user_id]["end_day"] = 0
-        if edit_day_stat is False
+        if edit_day_stat is False:
             await DAY_STAT().edit_day_stat(next_day)
         await self.save_data()
 
