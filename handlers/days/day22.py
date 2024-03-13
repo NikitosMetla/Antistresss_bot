@@ -196,3 +196,10 @@ async def answer_day22_11(message: types.Message, state: FSMContext, bot: Bot):
     await FEED_BACK().question12(message.from_user.id, message.text)
     await message.answer("Спасибо, что был с нами всё это время ❤️ Хорошего самоощущения и психологического благополучия👐")
     await state.clear()
+
+
+
+@user_router.message(Text(text="/contact_us"))
+async def start(message: types.CallbackQuery, state: FSMContext, bot: Bot):
+    await state.set_state(InputMessage.connect_us)
+    await message.answer("Введите ваше обращение")
