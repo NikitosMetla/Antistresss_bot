@@ -57,7 +57,7 @@ async def message_after_start(users_without_end):
         if next_day <= 22:
             await user_data.edit_user_day()
             keyboard = await confirm_keyboard(str(next_day))
-            tasks = [asyncio.create_task(bot.send_message(text=days_start_questions.get(str(next_day)), chat_id=user, reply_markup=keyboard.as_markup()))]
+            tasks = [asyncio.create_task(bot.send_message(text="<b>Просим тебя пройти незаконченный тобой день по причине проведения работ  на сервере. Приносим извинения за предоставленные неудобства</b>" + days_start_questions.get(str(next_day)), chat_id=user, reply_markup=keyboard.as_markup()))]
             await asyncio.gather(*tasks)
 
 async def edit_data():
