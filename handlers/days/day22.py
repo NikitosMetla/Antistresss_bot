@@ -199,7 +199,7 @@ async def answer_day22_11(message: types.Message, state: FSMContext, bot: Bot):
 
 
 
-@user_router.message(Text(text="/contact_us"))
+@day_router22.message(Text(text="/contact_us"))
 async def start(message: types.CallbackQuery, state: FSMContext, bot: Bot):
     await state.set_state(InputMessage.connect_us)
     await message.answer("Введите ваше обращение")
