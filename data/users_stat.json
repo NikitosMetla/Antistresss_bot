@@ -34,14 +34,31 @@
   },
   "224473558": {
     "day_now": 2,
-    "end_day": 1,
-    "last_LLIC": 2,
+    "end_day": 0,
+    "last_LLIC": 1,
     "end_LLIC": 1,
     "last_statements": 1,
     "end_statements": 1,
     "LLIC_results": [
-      52,
-      35
+      52
     ]
+  },
+  "5729645721": {
+    "day_now": 0,
+    "end_day": 0,
+    "last_LLIC": 1,
+    "end_LLIC": 0,
+    "last_statements": 1,
+    "end_statements": 0,
+    "LLIC_results": []
+  },
+  "1448073091": {
+    "day_now": 0,
+    "end_day": 0,
+    "last_LLIC": 1,
+    "end_LLIC": 0,
+    "last_statements": 1,
+    "end_statements": 0,
+    "LLIC_results": []
   }
 }
