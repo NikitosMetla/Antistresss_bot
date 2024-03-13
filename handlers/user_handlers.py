@@ -245,6 +245,7 @@ async def start(message: types.Message, state: FSMContext, bot: Bot):
 @user_router.callback_query(Text(text="ready_stress"), any_state)
 async def start_LLIC(call: types.CallbackQuery | types.Message, state: FSMContext, bot: Bot):
     number_test = await Users_stat(call.from_user.id).get_user_next_LLIC()
+    await state.set_state(InputMessage.oprosnik1_state)
     if type(call) is types.CallbackQuery:
         await call.message.delete()
         await call.message.answer("Тебе предлагается ряд шкал, в каждой из которых нужно выбрать то значение, которое наиболее"
@@ -256,7 +257,6 @@ async def start_LLIC(call: types.CallbackQuery | types.Message, state: FSMContex
             " точно характеризует твоё состояние <b>В НАСТОЯЩИЙ МОМЕНТ</b>."
             " Помни, что нужно выбрать <b>только одно</b> значение по каждой шкале")
     keyboard = await oprosnik1_keyboard("1 вопрос", number_test, last_question=0, points=0)
-    await state.set_state(InputMessage.oprosnik1_state)
     await state.update_data(last_question=1)
     if type(call) is types.CallbackQuery:
         await call.message.answer("Выбери значение, которое отображает твое состояние в настоящий момент:",
@@ -264,6 +264,12 @@ async def start_LLIC(call: types.CallbackQuery | types.Message, state: FSMContex
     else:
         await call.answer("Выбери значение, которое отображает твое состояние в настоящий момент:",
                                   reply_markup=keyboard.as_markup())
+
+
+@user_router.message(F.text, InputMessage.oprosnik1_state)
+@is_now_day(0)
+async def start(message: types.Message, state: FSMContext, bot: Bot):
+    return
 
 
 @user_router.callback_query(Text(startswith="answer_oprosnik"), InputMessage.oprosnik1_state)
