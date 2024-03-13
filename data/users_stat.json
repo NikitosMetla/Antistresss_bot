@@ -1,6 +1,29 @@
 {
   "774127719": {
-    "day_now": 1,
+    "day_now": 2,
+    "end_day": 1,
+    "last_LLIC": 2,
+    "end_LLIC": 1,
+    "last_statements": 1,
+    "end_statements": 1,
+    "LLIC_results": [
+      52,
+      52
+    ]
+  },
+  "965046780": {
+    "day_now": 2,
+    "end_day": 0,
+    "last_LLIC": 2,
+    "end_LLIC": 0,
+    "last_statements": 1,
+    "end_statements": 1,
+    "LLIC_results": [
+      52
+    ]
+  },
+  "327254001": {
+    "day_now": 2,
     "end_day": 0,
     "last_LLIC": 1,
     "end_LLIC": 1,
@@ -10,37 +33,16 @@
       52
     ]
   },
-  "965046780": {
-    "day_now": 1,
-    "end_day": 1,
-    "last_LLIC": 1,
-    "end_LLIC": 1,
-    "last_statements": 1,
-    "end_statements": 1,
-    "LLIC_results": [
-      52
-    ]
-  },
-  "327254001": {
-    "day_now": 1,
-    "end_day": 1,
-    "last_LLIC": 1,
-    "end_LLIC": 1,
-    "last_statements": 1,
-    "end_statements": 1,
-    "LLIC_results": [
-      52
-    ]
-  },
   "224473558": {
-    "day_now": 1,
+    "day_now": 2,
     "end_day": 1,
-    "last_LLIC": 1,
+    "last_LLIC": 2,
     "end_LLIC": 1,
     "last_statements": 1,
     "end_statements": 1,
     "LLIC_results": [
-      52
+      52,
+      35
     ]
   }
 }
