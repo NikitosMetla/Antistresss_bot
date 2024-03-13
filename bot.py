@@ -37,7 +37,7 @@ bot = Bot(token=bot_token, parse_mode="html")
 async def main():
     print(await bot.get_me())
     data = await edit_data()
-    await asyncio.sleep(5)
+    await asyncio.sleep(10)
     await message_after_start(data)
     await asyncio.sleep(10)
     await bot.delete_webhook(drop_pending_updates=True)
@@ -55,12 +55,12 @@ async def main():
 async def message_after_start(users_without_end):
     for user in users_without_end:
         user_data = Users_stat(user)
-        next_day = await user_data.get_user_next_day()
+        next_day = int(await user_data.get_user_day()) + 1
+        print(next_day)
         if next_day <= 22:
             await user_data.edit_user_day()
             keyboard = await confirm_keyboard(str(next_day))
-            tasks = [asyncio.create_task(bot.send_message(text="<b>Просим тебя пройти незаконченный тобой день по причине проведения работ  на сервере. Приносим извинения за предоставленные неудобства</b>" + days_start_questions.get(str(next_day)), chat_id=user, reply_markup=keyboard.as_markup()))]
-            await asyncio.gather(*tasks)
+            await bot.send_message(text="<b>Просим тебя пройти незаконченный тобой день по причине проведения работ  на сервере. Приносим извинения за предоставленные неудобства</b>" + days_start_questions.get(str(next_day)), chat_id=user, reply_markup=keyboard.as_markup())
 
 async def edit_data():
     users_data = await Users_stat().get_users_stat()
@@ -69,8 +69,12 @@ async def edit_data():
         end_day = int(users_data.get(user).get("end_day"))
         if end_day == 0:
             users_without_end.append(user)
-    tasks = [asyncio.create_task(Users_stat(user_id).edit_day_back()) for user_id in users_data.keys()]
-    await asyncio.gather(*tasks)
+    for user in users_without_end:
+        await Users_stat(user).edit_day_back()
+    # tasks = [asyncio.create_task(Users_stat(users).edit_day_back()) for users in users_data]
+    # await asyncio.gather(*tasks)
+    users_data = await Users_stat().get_users_stat()
+    print(users_data)
     return users_without_end
 
 
