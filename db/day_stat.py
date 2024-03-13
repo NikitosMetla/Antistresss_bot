@@ -11,8 +11,9 @@ class DAY_STAT:
 
     async def edit_day_stat(self, day: str | int):
         day = str(day)
-        self.users[day] = self.users.get(day) + 1
-        if day != "0":
+        if day != "22":
+            self.users[day] = self.users.get(day) + 1
+        if day != "0" and day != "22":
             self.users[str(int(day) - 1)] = self.users.get(str(int(day) - 1)) - 1
         await self.save_data()
 

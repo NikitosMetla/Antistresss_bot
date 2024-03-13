@@ -6,6 +6,7 @@ from aiogram.fsm.state import any_state
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 from aiogram.utils.keyboard import InlineKeyboardBuilder
 
+from db.answers import Answers
 from db.users_stat import Users_stat
 from handlers.user_handlers import start_LLIC
 from settings import InputMessage, sticker_ids
@@ -27,13 +28,19 @@ async def start_day16(message: types.CallbackQuery, state: FSMContext, bot: Bot)
 @day_router16.callback_query(Text(text="UnderstandingProblem|16"))
 @is_now_day(16)
 async def understanding_problem(message: types.CallbackQuery, state: FSMContext, bot: Bot):
-    await message.message.answer("К сожалению, не всегда на работе или учебе объясняют, какой смысл в той или иной деятельности. Но чтобы тебе самому было легче и интересней справится с той или иной работой, лучше это всё-таки выяснить. Как ты можешь это сделать?")
+    question = await message.message.answer("К сожалению, не всегда на работе или учебе объясняют, какой смысл в той или иной деятельности. Но чтобы тебе самому было легче и интересней справится с той или иной работой, лучше это всё-таки выяснить. Как ты можешь это сделать?")
     await state.set_state(InputMessage.input_answer_state16_1)
+    await state.update_data(question=str(await Users_stat(message.from_user.id).get_user_day()) + ". " + question.text)
 
 
 @day_router16.message(F.text, InputMessage.input_answer_state16_1)
 @is_now_day(16)
 async def answer_day16_1(message: types.Message, state: FSMContext, bot: Bot):
+    data = await state.get_data()
+    question = data.get("question")
+    answers = Answers()
+    await answers.add_answer(question=question, answer=message.text, user_id=message.from_user.id)
+    await state.clear()
     await message.answer_sticker(sticker=sticker_ids[-6])
     await message.answer(("Действительно, есть несколько общих способов:\n"
                          "• Непосредственно спросить у руководителя, как твоя работа влияет на достижение целей компании/спросить у преподавателя, на развитие каких навыков направлено это задание и как ты сможешь применять их в будущем.\n"
@@ -78,7 +85,7 @@ async def answer_day16_3(message: types.CallbackQuery, state: FSMContext, bot: B
 @is_now_day(16)
 async def answer_day16_4(message: types.CallbackQuery, state: FSMContext, bot: Bot):
     await message.message.answer_sticker(sticker=sticker_ids[-5])
-    await message.message.answer(
+    question = await message.message.answer(
         "Ещё один аспект, про который мы поговорим сегодня — мотивация."
         " Мы уже обсудили, что гораздо легче работать, если ты понимаешь смысл того, что ты делаешь, и на что твоя деятельность влияет, а ещё если в коллективе благоприятный климат 👐"
         " Есть ещё один фактор, который мы бы хотели обсудить: обратная связь. Обратная связь от руководства, преподавателей и коллег может быть очень разной и тебе необходимо понять, что тебе важно услышать:"
@@ -91,8 +98,12 @@ async def answer_day16_4(message: types.CallbackQuery, state: FSMContext, bot: B
 @day_router16.message(F.text, InputMessage.input_answer_state16_5)
 @is_now_day(16)
 async def answer_day16_5(message: types.Message, state: FSMContext, bot: Bot):
+    data = await state.get_data()
+    question = data.get("question")
+    answers = Answers()
+    await answers.add_answer(question=question, answer=message.text, user_id=message.from_user.id)
     await message.answer_sticker(sticker=sticker_ids[-4])
-    await message.answer(
+    question = await message.answer(
         "Кроме этого есть ещё множество факторов, влияющих на мотивацию:"
         "\n• твои потребности и ценности (которые могут включать желание самореализации в выбранной сфере деятельности и личностное развитие, стремление к престижной работе, повышению социального статуса, улучшению качества жизни и/или поддержанию достигнутого, ориентацию на безопасность (в том числе финансовую) и многое другое)"
         "\n• ясные достаточно сложные, но достижимые цели"
@@ -102,18 +113,28 @@ async def answer_day16_5(message: types.Message, state: FSMContext, bot: Bot):
         "\nЧего в твоей работе или учебе не хватает, чтобы мотивация была выше?"
     )
     await state.set_state(InputMessage.input_answer_state16_6)
+    await state.update_data(question=str(await Users_stat(message.from_user.id).get_user_day()) + ". " + question.text)
 
 
 @day_router16.message(F.text, InputMessage.input_answer_state16_6)
 @is_now_day(16)
 async def answer_day16_6(message: types.Message, state: FSMContext, bot: Bot):
-    await message.answer("Как ты можешь поспособствовать появлению этого?")
+    data = await state.get_data()
+    question = data.get("question")
+    answers = Answers()
+    await answers.add_answer(question=question, answer=message.text, user_id=message.from_user.id)
+    question = await message.answer("Как ты можешь поспособствовать появлению этого?")
     await state.set_state(InputMessage.input_answer_state16_7)
+    await state.update_data(question=str(await Users_stat(message.from_user.id).get_user_day()) + ". " + question.text)
 
 
 @day_router16.message(F.text, InputMessage.input_answer_state16_7)
 @is_now_day(16)
 async def answer_day16_7(message: types.Message, state: FSMContext, bot: Bot):
+    data = await state.get_data()
+    question = data.get("question")
+    answers = Answers()
+    await answers.add_answer(question=question, answer=message.text, user_id=message.from_user.id)
     await message.answer(
         "Хорошо)\nДавай ещё быстренько посмотрим, что у тебя с состоянием"
     )

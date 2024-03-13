@@ -8,6 +8,7 @@ from aiogram.fsm.state import any_state
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 from aiogram.utils.keyboard import InlineKeyboardBuilder
 
+from db.answers import Answers
 from db.users_stat import Users_stat
 from handlers.user_handlers import start_LLIC
 from settings import InputMessage, sticker_ids
@@ -34,14 +35,20 @@ async def start_day12(message: types.CallbackQuery, state: FSMContext, bot: Bot)
     if now >= target_time:
         target_time += timedelta(days=1)
     time_difference = target_time - now
+    await message.message.answer("Вечером вернемся с расспросами😄")
     await asyncio.sleep(time_difference.total_seconds())
-    await message.message.answer("Что удалось заметить?")
+    question = await message.message.answer("Что удалось заметить?")
     await state.set_state(InputMessage.input_answer_state12_2)
+    await state.update_data(question=str(await Users_stat(message.from_user.id).get_user_day()) + ". " + question.text)
 
 
 @day_router12.message(F.text, InputMessage.input_answer_state12_2)
 @is_now_day(12)
 async def answer_day11_5(message: types.Message, state: FSMContext, bot: Bot):
+    data = await state.get_data()
+    question = data.get("question")
+    answers = Answers()
+    await answers.add_answer(question=question, answer=message.text, user_id=message.from_user.id)
     await state.clear()
     await message.answer_sticker(sticker=sticker_ids[-1])
     await start_LLIC(message, state, bot)

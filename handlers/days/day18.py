@@ -6,6 +6,7 @@ from aiogram.fsm.state import any_state
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 from aiogram.utils.keyboard import InlineKeyboardBuilder
 
+from db.answers import Answers
 from db.users_stat import Users_stat
 from handlers.user_handlers import start_LLIC
 from settings import InputMessage, sticker_ids
@@ -88,15 +89,20 @@ async def continue_psycho2_day18(message: types.CallbackQuery, state: FSMContext
 @is_now_day(18)
 async def end_day18(message: types.CallbackQuery, state: FSMContext, bot: Bot):
     await message.message.answer_sticker(sticker=sticker_ids[2])
-    await message.message.answer(
+    question = await message.message.answer(
         "Хорошо) Мы с тобой сегодня попробовали много инструментов, какой из них ты используешь завтра в случае возникновения напряжения?"
     )
     await state.set_state(InputMessage.input_answer_state18_1)
+    await state.update_data(question=str(await Users_stat(message.from_user.id).get_user_day()) + ". " + question.text)
 
 
 @day_router18.message(F.text, InputMessage.input_answer_state18_1)
 @is_now_day(18)
 async def answer_day18_1(message: types.Message, state: FSMContext, bot: Bot):
+    data = await state.get_data()
+    question = data.get("question")
+    answers = Answers()
+    await answers.add_answer(question=question, answer=message.text, user_id=message.from_user.id)
     await message.answer("Давай ещё быстренько посмотрим, что у тебя с состоянием")
     await state.clear()
     await start_LLIC(message, state, bot)

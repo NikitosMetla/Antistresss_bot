@@ -5,6 +5,7 @@ from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup, Message, C
 from aiogram import types, Bot, F, Router
 from aiogram.utils.keyboard import InlineKeyboardBuilder
 
+from db.answers import Answers
 from db.feed_back import FEED_BACK
 from db.users import Users
 from db.users_stat import Users_stat
@@ -26,36 +27,55 @@ async def not_sad_day22(message: CallbackQuery, state: FSMContext, bot: Bot):
 @day_router22.message(F.text, InputMessage.input_answer_state22_1)
 @is_now_day(22)
 async def answer_day22_1(message: types.Message, state: FSMContext, bot: Bot):
-    await message.answer("Ага, теперь давай более конкретно. Какие методы ты выбираешь и когда/как часто каждый из них будешь использовать? Пропиши по пунктам")
+    question = await message.answer("Ага, теперь давай более конкретно. Какие методы ты выбираешь и когда/как часто каждый из них будешь использовать? Пропиши по пунктам")
     await state.set_state(InputMessage.input_answer_state22_2)
+    await state.update_data(question=str(await Users_stat(message.from_user.id).get_user_day()) + ". " + question.text)
 
 
 @day_router22.message(F.text, InputMessage.input_answer_state22_2)
 @is_now_day(22)
 async def answer_day22_2(message: types.Message, state: FSMContext, bot: Bot):
-    await message.answer("Как ты думаешь, на сколько процентов ты сможешь выполнить этот план?")
+    data = await state.get_data()
+    question = data.get("question")
+    answers = Answers()
+    await answers.add_answer(question=question, answer=message.text, user_id=message.from_user.id)
+    question = await message.answer("Как ты думаешь, на сколько процентов ты сможешь выполнить этот план?")
     await state.set_state(InputMessage.input_answer_state22_3)
+    await state.update_data(question=str(await Users_stat(message.from_user.id).get_user_day()) + ". " + question.text)
 
 
 @day_router22.message(F.text, InputMessage.input_answer_state22_3)
 @is_now_day(22)
 async def answer_day22_3(message: types.Message, state: FSMContext, bot: Bot):
-
-    await message.answer("Что ты можешь предпринять, чтобы эти помехи предотвратить или минимизировать их ущерб?")
+    data = await state.get_data()
+    question = data.get("question")
+    answers = Answers()
+    await answers.add_answer(question=question, answer=message.text, user_id=message.from_user.id)
+    question = await message.answer("Что ты можешь предпринять, чтобы эти помехи предотвратить или минимизировать их ущерб?")
     await state.set_state(InputMessage.input_answer_state22_4)
+    await state.update_data(question=str(await Users_stat(message.from_user.id).get_user_day()) + ". " + question.text)
 
 
 @day_router22.message(F.text, InputMessage.input_answer_state22_4)
 @is_now_day(22)
 async def answer_day22_4(message: types.Message, state: FSMContext, bot: Bot):
-
-    await message.answer("Что ещё можно сделать для того, чтобы тебе было легче достичь цели?")
+    data = await state.get_data()
+    question = data.get("question")
+    answers = Answers()
+    await answers.add_answer(question=question, answer=message.text, user_id=message.from_user.id)
+    question = await message.answer("Что ещё можно сделать для того, чтобы тебе было легче достичь цели?")
     await state.set_state(InputMessage.input_answer_state22_21)
+    await state.update_data(question=str(await Users_stat(message.from_user.id).get_user_day()) + ". " + question.text)
 
 
 @day_router22.message(F.text, InputMessage.input_answer_state22_21)
 @is_now_day(22)
 async def answer_day22_5(message: types.Message, state: FSMContext, bot: Bot):
+    data = await state.get_data()
+    question = data.get("question")
+    answers = Answers()
+    await answers.add_answer(question=question, answer=message.text, user_id=message.from_user.id)
+    await state.clear()
     await message.answer("Отлично! Теперь у тебя есть план) Осталось его придерживаться")
     await message.answer_sticker(sticker=sticker_ids[6])
     await message.answer("Вот и подошла наша программа к концу! Давай обсудим результаты)\nЧто изменилось вследствие прохождения программы?")

@@ -5,6 +5,7 @@ from aiogram.fsm.state import any_state
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 from aiogram.utils.keyboard import InlineKeyboardBuilder
 
+from db.answers import Answers
 from db.users_stat import Users_stat
 from settings import InputMessage
 from utils.is_now_day import is_now_day
@@ -15,7 +16,7 @@ day_router3 = Router()
 @day_router3.callback_query(Text(text="confirm|3"), any_state)
 @is_now_day(3)
 async def start_again(message: types.CallbackQuery, state: FSMContext, bot: Bot):
-    if int(await Users_stat(message.from_user.id).get_user_day()) == int(message.data.split("|")[1]):
+    if int(str(await Users_stat(message.from_user.id).get_user_day())) == int(message.data.split("|")[1]):
         await state.clear()
         keyboard = InlineKeyboardBuilder()
         keyboard.row(InlineKeyboardButton(text="Угу, вспомнил", callback_data="REMEMBERED|3"))
@@ -44,35 +45,55 @@ async def start_again(message: types.CallbackQuery, state: FSMContext, bot: Bot)
 @day_router3.callback_query(Text(text="REMEMBERED|3"))
 @is_now_day(3)
 async def remembered(message: types.CallbackQuery, state: FSMContext, bot: Bot):
-    await message.message.answer("Опиши, что происходило с твоим телом в тот момент")
+    question = await message.message.answer("Опиши, что происходило с твоим телом в тот момент")
     await state.set_state(InputMessage.input_answer_state3_1)
+    await state.update_data(question=str(await Users_stat(message.from_user.id).get_user_day()) + ". " + question.text)
 
 
 @day_router3.message(F.text, InputMessage.input_answer_state3_1)
 @is_now_day(3)
 async def answer_remembered1(message: types.Message, state: FSMContext, bot: Bot):
-    await message.answer("Угу, а какие мысли у тебя возникали?")
+    data = await state.get_data()
+    question = data.get("question")
+    answers = Answers()
+    await answers.add_answer(question=question, answer=message.text, user_id=message.from_user.id)
+    question = await message.answer("Угу, а какие мысли у тебя возникали?")
     await state.set_state(InputMessage.input_answer_state3_2)
+    await state.update_data(question=str(await Users_stat(message.from_user.id).get_user_day()) + ". " + question.text)
 
 
 @day_router3.message(F.text, InputMessage.input_answer_state3_2)
 @is_now_day(3)
 async def answer_remembered2(message: types.Message, state: FSMContext, bot: Bot):
-    await message.answer("А что ты чувствовал? Какая эмоция была? (Заметь, эмоция — не мысль, не твои действия в ситуации, "
+    data = await state.get_data()
+    question = data.get("question")
+    answers = Answers()
+    await answers.add_answer(question=question, answer=message.text, user_id=message.from_user.id)
+    question = await message.answer("А что ты чувствовал? Какая эмоция была? (Заметь, эмоция — не мысль, не твои действия в ситуации, "
                          "это ощущение, которое может быть сложно назвать, но ты всё-таки попробуй)")
     await state.set_state(InputMessage.input_answer_state3_3)
+    await state.update_data(question=str(await Users_stat(message.from_user.id).get_user_day()) + ". " + question.text)
 
 
 @day_router3.message(F.text, InputMessage.input_answer_state3_3)
 @is_now_day(3)
 async def answer_remembered3(message: types.Message, state: FSMContext, bot: Bot):
-    await message.answer("Иии, последнее на сегодня, что ты сделал?")
+    data = await state.get_data()
+    question = data.get("question")
+    answers = Answers()
+    await answers.add_answer(question=question, answer=message.text, user_id=message.from_user.id)
+    question = await message.answer("Иии, последнее на сегодня, что ты сделал?")
     await state.set_state(InputMessage.input_answer_state3_4)
+    await state.update_data(question=str(await Users_stat(message.from_user.id).get_user_day()) + ". " + question.text)
 
 
 @day_router3.message(F.text, InputMessage.input_answer_state3_4)
 @is_now_day(3)
 async def answer_remembered4(message: types.Message, state: FSMContext, bot: Bot):
+    data = await state.get_data()
+    question = data.get("question")
+    answers = Answers()
+    await answers.add_answer(question=question, answer=message.text, user_id=message.from_user.id)
     await message.answer("Ух, не лёгкую работу ты сегодня проделал! Столько внимания своему состоянию уделил! "
                          "А мы тебе рассказали про разные уровни проявления стресса (физиологический, "
                          "психологический и поведенческий). И каждый из них мы будем использовать, чтобы бороться со стрессом. "

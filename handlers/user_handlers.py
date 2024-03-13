@@ -32,10 +32,11 @@ async def start(message: types.Message, state: FSMContext, bot: Bot):
         text += f"\n{i} день: {results[i]}"
     await message.answer(text=text)
     await message.answer_document(document=FSInputFile("data/users.xlsx"))
+    await message.answer_document(document=FSInputFile("data/answers.xlsx"))
     await message.answer_document(document=FSInputFile("data/feed_back.xlsx"))
 
 
-@user_router.message(Text(text="/сontact_us"), any_state)
+@user_router.message(Text(text="/contact_us"), any_state)
 async def start(message: types.CallbackQuery, state: FSMContext, bot: Bot):
     await state.set_state(InputMessage.connect_us)
     await message.answer("Введите ваше обращение")
@@ -124,6 +125,7 @@ async def start(message: types.Message, state: FSMContext, bot: Bot):
 async def start(call: types.CallbackQuery, state: FSMContext, bot: Bot):
     await Users().user_course(course=call.data.split("|")[1], user_id=call.from_user.id)
     await call.message.answer("Укажи, пожалуйста, форму обучения", reply_markup=education_form_keyboard.as_markup())
+    await call.message.delete()
 
 
 @user_router.callback_query(Text(startswith="NOT_STUDENT"), any_state)
@@ -315,6 +317,10 @@ async def start(call: types.CallbackQuery | types.Message, state: FSMContext, bo
             await dinamic_22(call, state, bot)
         else:
             await state.clear()
+            if type(call) is types.CallbackQuery:
+                await call.message.answer("На сегодня все👐")
+            else:
+                await call.answer("На сегодня все👐")
             await user.edit_user_end_day()
     else:
         keyboard = await oprosnik1_keyboard(f"{last_question + 1} вопрос", number_test,
@@ -378,12 +384,15 @@ async def start(call: types.CallbackQuery, state: FSMContext, bot: Bot):
         elif number_test == 1:
             await call.message.answer("Интересно, как можно расшифровать все эти данные и чем различаются эти понятия?"
                                   " Об этом ты совсем скоро узнаешь в нашей программе😉")
+            await call.message.answer("На сегодня все👐")
         elif number_test == 4:
             keyboard = InlineKeyboardBuilder()
             keyboard.row(InlineKeyboardButton(text="😍", callback_data="answer|23😍"))
             keyboard.row(InlineKeyboardButton(text="🙂", callback_data="answer|23🙂"))
             keyboard.row(InlineKeyboardButton(text="😟", callback_data="answer|23😟"))
             await call.message.answer("Ух ты! Как тебе результаты?", reply_markup=keyboard.as_markup())
+        else:
+            await call.message.answer("На сегодня все👐")
         await state.clear()
     else:
         keyboard = await statements_keyboard(number_test=number_test, last_statement=last_statement, points=points)

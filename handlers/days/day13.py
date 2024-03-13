@@ -8,6 +8,7 @@ from aiogram.fsm.state import any_state
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 from aiogram.utils.keyboard import InlineKeyboardBuilder
 
+from db.answers import Answers
 from db.users_stat import Users_stat
 from settings import InputMessage
 from utils.is_now_day import is_now_day
@@ -20,7 +21,7 @@ day_router13 = Router()
 async def start_day13(message: types.CallbackQuery, state: FSMContext, bot: Bot):
     if int(await Users_stat(message.from_user.id).get_user_day()) == int(message.data.split("|")[1]):
         await state.clear()
-        await message.message.answer("Возможно, ты заметил какую-то закономерность и, например, на схожие стрессоры реагируешь "
+        question = await message.message.answer("Возможно, ты заметил какую-то закономерность и, например, на схожие стрессоры реагируешь "
                                      "аналогичной последовательностью действий. Возможно, во всех ситуациях твое поведение разнилось. "
                                      "У каждого из нас свой репертуар стратегий — чем он богаче, тем больше шансов эффективно решить проблему\n\n"
                                      "Давай посмотрим на то, какие стратегии вообще бывают. "
@@ -32,32 +33,52 @@ async def start_day13(message: types.CallbackQuery, state: FSMContext, bot: Bot)
                                      "стратегия в разных ситуациях приведёт к разным последствиям. Посмотри на эти стратегии и попробуй соотнести "
                                      "их с теми, которые ты отследил у себя за прошлую неделю. Какие стратегии использовал?")
         await state.set_state(InputMessage.input_answer_state13_1)
+        await state.update_data(question=str(await Users_stat(message.from_user.id).get_user_day()) + ". " + question.text)
 
 
 @day_router13.message(F.text, InputMessage.input_answer_state13_1)
 @is_now_day(13)
 async def answer_day13_1(message: types.Message, state: FSMContext, bot: Bot):
-    await message.answer("А к каким, как тебе кажется, прибегаешь чаще всего?")
+    data = await state.get_data()
+    question = data.get("question")
+    answers = Answers()
+    await answers.add_answer(question=question, answer=message.text, user_id=message.from_user.id)
+    question = await message.answer("А к каким, как тебе кажется, прибегаешь чаще всего?")
     await state.set_state(InputMessage.input_answer_state13_2)
+    await state.update_data(question=str(await Users_stat(message.from_user.id).get_user_day()) + ". " + question.text)
 
 
 @day_router13.message(F.text, InputMessage.input_answer_state13_2)
 @is_now_day(13)
 async def answer_day13_2(message: types.Message, state: FSMContext, bot: Bot):
-    await message.answer("А какие, наоборот, не используешь или используешь крайне редко?")
+    data = await state.get_data()
+    question = data.get("question")
+    answers = Answers()
+    await answers.add_answer(question=question, answer=message.text, user_id=message.from_user.id)
+    question = await message.answer("А какие, наоборот, не используешь или используешь крайне редко?")
     await state.set_state(InputMessage.input_answer_state13_3)
+    await state.update_data(question=str(await Users_stat(message.from_user.id).get_user_day()) + ". " + question.text)
 
 
 @day_router13.message(F.text, InputMessage.input_answer_state13_3)
 @is_now_day(13)
 async def answer_day13_3(message: types.Message, state: FSMContext, bot: Bot):
-    await message.answer("Какие стратегии ты бы хотел использовать чаще?")
+    data = await state.get_data()
+    question = data.get("question")
+    answers = Answers()
+    await answers.add_answer(question=question, answer=message.text, user_id=message.from_user.id)
+    question = await message.answer("Какие стратегии ты бы хотел использовать чаще?")
     await state.set_state(InputMessage.input_answer_state13_4)
+    await state.update_data(question=str(await Users_stat(message.from_user.id).get_user_day()) + ". " + question.text)
 
 
 @day_router13.message(F.text, InputMessage.input_answer_state13_4)
 @is_now_day(13)
 async def answer_day13_4(message: types.Message, state: FSMContext, bot: Bot):
+    data = await state.get_data()
+    question = data.get("question")
+    answers = Answers()
+    await answers.add_answer(question=question, answer=message.text, user_id=message.from_user.id)
     await message.answer("Хорошо!\n"
                          "Можно заметить, что все стратегии направлены на 2 фокуса: на проблему и возникающие в связи с ней эмоции. "
                          "Может показаться, что важны только стратегии, направленные непосредственно на решение проблемы. "

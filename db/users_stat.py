@@ -44,6 +44,9 @@ class Users_stat:
             await self.edit_user_statements()
         return int(self.users.get(self.user_id).get("last_statements"))
 
+    async def get_user_next_day(self):
+        return int(self.users.get(self.user_id).get("day_now")) + 1
+
     async def edit_user_LLIC(self):
         self.users[self.user_id]["last_LLIC"] = int(self.users.get(self.user_id).get("last_LLIC")) + 1
         self.users[self.user_id]["end_LLIC"] = 0
@@ -67,6 +70,18 @@ class Users_stat:
 
     async def edit_user_end_day(self):
         self.users[self.user_id]["end_day"] = 1
+        await self.save_data()
+
+    async def edit_day_back(self):
+        day = int(self.users.get(self.user_id).get('day_now'))
+        end_day = self.users.get(self.user_id).get("end_day")
+        if end_day == 0:
+            self.users[self.user_id]["day_now"] = day - 1
+            self.users[self.user_id]["end_day"] = 1
+            await self.save_data()
+
+    async def remove_user(self):
+        self.users.pop(self.user_id)
         await self.save_data()
 
     async def get_user_day(self):

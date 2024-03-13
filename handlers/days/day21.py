@@ -5,6 +5,7 @@ from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup, Message, C
 from aiogram import types, Bot, F, Router
 from aiogram.utils.keyboard import InlineKeyboardBuilder
 
+from db.answers import Answers
 from db.users_stat import Users_stat
 from handlers.user_handlers import start_LLIC
 from settings import InputMessage, sticker_ids
@@ -27,27 +28,42 @@ async def start_day21(message: CallbackQuery, state: FSMContext, bot: Bot):
         await message.message.answer("Мы считаем, что важно работать сразу над двумя аспектами: и над предупреждением стресса, и над его снижением. "
                                       "Поэтому давай посмотрим на всё, что нам удалось собрать за время программы")
 
-        await message.message.answer("Во-первых, твои основные стрессоры. Выпиши их здесь снова")
+        question = await message.message.answer("Во-первых, твои основные стрессоры. Выпиши их здесь снова")
         await state.set_state(InputMessage.input_answer_state21_1)
+        await state.update_data(question=str(await Users_stat(message.from_user.id).get_user_day()) + ". " + question.text)
 
 
 @day_router21.message(F.text, InputMessage.input_answer_state21_1)
 @is_now_day(21)
 async def answer_day21_1(message: types.Message, state: FSMContext, bot: Bot):
-    await message.answer("Во-вторых, что можно сделать, чтобы исключить/минимизировать ✍️")
+    data = await state.get_data()
+    question = data.get("question")
+    answers = Answers()
+    await answers.add_answer(question=question, answer=message.text, user_id=message.from_user.id)
+    question = await message.answer("Во-вторых, что можно сделать, чтобы исключить/минимизировать ✍️")
     await state.set_state(InputMessage.input_answer_state21_2)
+    await state.update_data(question=str(await Users_stat(message.from_user.id).get_user_day()) + ". " + question.text)
 
 
 @day_router21.message(F.text, InputMessage.input_answer_state21_2)
 @is_now_day(21)
 async def answer_day21_2(message: types.Message, state: FSMContext, bot: Bot):
-    await message.answer("В-третьих, что ты делаешь, когда они возникают, и что бы ты хотел делать (в том числе какие техники применять)?")
+    data = await state.get_data()
+    question = data.get("question")
+    answers = Answers()
+    await answers.add_answer(question=question, answer=message.text, user_id=message.from_user.id)
+    question = await message.answer("В-третьих, что ты делаешь, когда они возникают, и что бы ты хотел делать (в том числе какие техники применять)?")
     await state.set_state(InputMessage.input_answer_state21_3)
+    await state.update_data(question=str(await Users_stat(message.from_user.id).get_user_day()) + ". " + question.text)
 
 
 @day_router21.message(F.text, InputMessage.input_answer_state21_3)
 @is_now_day(21)
 async def answer_day21_3(message: types.Message, state: FSMContext, bot: Bot):
+    data = await state.get_data()
+    question = data.get("question")
+    answers = Answers()
+    await answers.add_answer(question=question, answer=message.text, user_id=message.from_user.id)
     await state.clear()
     keyboard = InlineKeyboardBuilder()
     keyboard.row(InlineKeyboardButton(text="Да, наслышан", callback_data="SMART_Yes|21"))
@@ -103,13 +119,18 @@ async def smart_no_day21(message: CallbackQuery, state: FSMContext, bot: Bot):
                                  "\n4   Relevant – значимая: не ставь цель, которую в целом было бы хорошо достичь, "
                                   "выбирай то, с чем тебе важно поработать именно сейчас"
                                  "\n5   Time bound – мы предлагаем тебе поставить цель на месяц, но ты, конечно, можешь выбрать и другой интервал")
-    await message.message.answer("Какую же цель ты поставишь?")
+    question = await message.message.answer("Какую же цель ты поставишь?")
     await state.set_state(InputMessage.input_answer_state21_4)
+    await state.update_data(question=str(await Users_stat(message.from_user.id).get_user_day()) + ". " + question.text)
 
 
 @day_router21.message(F.text, InputMessage.input_answer_state21_4)
 @is_now_day(21)
 async def answer_day21_2(message: types.Message, state: FSMContext, bot: Bot):
+    data = await state.get_data()
+    question = data.get("question")
+    answers = Answers()
+    await answers.add_answer(question=question, answer=message.text, user_id=message.from_user.id)
     await state.clear()
     keyboard = InlineKeyboardBuilder().row(
         InlineKeyboardButton(text="Да", callback_data="SMART_Yes_Final|21"),
@@ -130,6 +151,7 @@ async def smart_yes_final_day21(message: CallbackQuery | Message, state: FSMCont
         # await message.message.answer_sticker()
         await message.message.answer_sticker(sticker=sticker_ids[4])
         await message.message.answer("На сегодня всё 👐 Ты проделал большую работу! Главное — продолжать идти 🙂")
+    await state.clear()
     await Users_stat(message.from_user.id).edit_user_end_day()
 
 

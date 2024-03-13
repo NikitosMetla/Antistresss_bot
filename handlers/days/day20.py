@@ -5,6 +5,7 @@ from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton, Message, C
 from aiogram.utils.keyboard import InlineKeyboardBuilder
 from aiogram.utils.markdown import hitalic
 
+from db.answers import Answers
 from handlers.user_handlers import start_LLIC
 from settings import InputMessage, sticker_ids
 from db.users_stat import Users_stat
@@ -43,14 +44,19 @@ async def start_day20(message: CallbackQuery, state: FSMContext, bot: Bot):
 @day_router20.callback_query(Text(text="Understood|20"))
 @is_now_day(20)
 async def answer_day20_1(message: CallbackQuery, state: FSMContext, bot: Bot):
-    await message.message.answer("Итак, мы обсудили физиологический уровень, психологический, с его перцептивным и рефлексивными компонентами, и у нас остался поведенческий. "
+    question = await message.message.answer("Итак, мы обсудили физиологический уровень, психологический, с его перцептивным и рефлексивными компонентами, и у нас остался поведенческий. "
                          "Как думаешь, что туда входит?")
     await state.set_state(InputMessage.input_answer_state20_3)
+    await state.update_data(question=str(await Users_stat(message.from_user.id).get_user_day()) + ". " + question.text)
 
 
 @day_router20.message(F.text, InputMessage.input_answer_state20_3)
 @is_now_day(20)
 async def answer_day19_1(message: types.Message, state: FSMContext, bot: Bot):
+    data = await state.get_data()
+    question = data.get("question")
+    answers = Answers()
+    await answers.add_answer(question=question, answer=message.text, user_id=message.from_user.id)
     await state.clear()
     keyboard = InlineKeyboardBuilder()
     await message.answer_sticker(sticker=sticker_ids[5])

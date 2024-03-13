@@ -4,6 +4,7 @@ from aiogram.fsm.context import FSMContext
 from aiogram.types import BufferedInputFile, InlineKeyboardButton
 from aiogram.utils.keyboard import InlineKeyboardBuilder
 
+from db.answers import Answers
 from db.users_stat import Users_stat
 from handlers.user_handlers import start_LLIC
 from settings import start_text, InputMessage
@@ -15,7 +16,7 @@ day_router2 = Router()
 @day_router2.callback_query(Text(text="confirm|2"))
 @is_now_day(2)
 async def start_day1(message: types.CallbackQuery, state: FSMContext, bot: Bot):
-    if int(await Users_stat(message.from_user.id).get_user_day()) == int(message.data.split("|")[1]):
+    if int(str(await Users_stat(message.from_user.id).get_user_day())) == int(message.data.split("|")[1]):
         text = """Представим, что ты в точке А: спокойно выполняешь рабочие задачки, отвлекаясь на сообщения в мессенджерах или small talks с коллегами — это твой нормальный рабочий режим. И тут тебе прилетает сообщение от руководителя: «Срочно! Надо сделать то-то и то-то, иначе …». У тебя начинает быстрее биться сердце, сознание сужается до одной единственной мысли о прилетевшем поручении, а тревога, кажется, накрывает с головой и ты замираешь в бездействии на некоторое время (секунды, минуты, а может быть даже часы…)
     
 Это первая стадия в динамике развития стресса, которая называется alarm reaction, или стадия тревоги. Здесь твоя продуктивность падает, а организм готовится к предстоящему сопротивлению
@@ -39,13 +40,18 @@ async def start_day1(message: types.CallbackQuery, state: FSMContext, bot: Bot):
 @day_router2.callback_query(Text(text="Remember_1"))
 @is_now_day(2)
 async def start_day1(message: types.CallbackQuery, state: FSMContext, bot: Bot):
-    await message.message.answer("Что ты испытывал, когда только услышал о проблеме?")
+    question = await message.message.answer("Что ты испытывал, когда только услышал о проблеме?")
     await state.set_state(InputMessage.input_answer_state2)
+    await state.update_data(question=str(await Users_stat(message.from_user.id).get_user_day()) + ". " + question.text)
 
 
 @day_router2.message(F.text, InputMessage.input_answer_state2)
 @is_now_day(2)
 async def answer_start2(message: types.Message, state: FSMContext, bot: Bot):
+    data = await state.get_data()
+    question = data.get("question")
+    answers = Answers()
+    await answers.add_answer(question=question, answer=message.text, user_id=message.from_user.id)
     await state.clear()
     keyboard = InlineKeyboardBuilder()
     keyboard.row(InlineKeyboardButton(text=" Стресс придал мне сил 💪", callback_data="Remember_1_2"))

@@ -8,6 +8,7 @@ from aiogram.fsm.state import any_state
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 from aiogram.utils.keyboard import InlineKeyboardBuilder
 
+from db.answers import Answers
 from db.users_stat import Users_stat
 from handlers.user_handlers import start_LLIC
 from settings import InputMessage, sticker_ids
@@ -21,25 +22,35 @@ day_router15 = Router()
 async def start_day15(message: types.CallbackQuery, state: FSMContext, bot: Bot):
     if int(await Users_stat(message.from_user.id).get_user_day()) == int(message.data.split("|")[1]):
         await state.clear()
-        await message.message.answer("Поговорим о процессуальной стороне твоей деятельности. Задумывался ли ты когда-нибудь о том, как можешь облегчить свою работу? "
+        question = await message.message.answer("Поговорим о процессуальной стороне твоей деятельности. Задумывался ли ты когда-нибудь о том, как можешь облегчить свою работу? "
                                      "Кажется, что все люди с удовольствием делали бы меньше, но на самом деле большая часть людей выполняет задачи так, как они привыкли это делать, "
                                      "как научились или как кто-то их научил. Мало того, что сформировавшиеся паттерны поведения не всегда бывают эффективными, технологии развиваются так быстро, "
                                      "что буквально каждый день появляются новые инструменты, которые могли бы оптимизировать и твою деятельность. "
                                      "Процесс анализа и коррекции стиля выполнения работы занимает какое-то время, но если это проделать с задачами, отнимающими много времени и сил, это окупится сполна. "
                                      "Какую часть из своей работы ты бы хотел <b>оптимизировать?</b>")
         await state.set_state(InputMessage.input_answer_state15_1)
+        await state.update_data(question=str(await Users_stat(message.from_user.id).get_user_day()) + ". " + question.text)
 
 
 @day_router15.message(F.text, InputMessage.input_answer_state15_1)
 @is_now_day(15)
 async def answer_day15_1(message: types.Message, state: FSMContext, bot: Bot):
-    await message.answer("Как ты мог бы это сделать?")
+    data = await state.get_data()
+    question = data.get("question")
+    answers = Answers()
+    await answers.add_answer(question=question, answer=message.text, user_id=message.from_user.id)
+    question = await message.answer("Как ты мог бы это сделать?")
     await state.set_state(InputMessage.input_answer_state15_2)
+    await state.update_data(question=str(await Users_stat(message.from_user.id).get_user_day()) + ". " + question.text)
 
 
 @day_router15.message(F.text, InputMessage.input_answer_state15_2)
 @is_now_day(15)
 async def answer_day15_2(message: types.Message, state: FSMContext, bot: Bot):
+    data = await state.get_data()
+    question = data.get("question")
+    answers = Answers()
+    await answers.add_answer(question=question, answer=message.text, user_id=message.from_user.id)
     keyboard = InlineKeyboardBuilder()
     await state.clear()
     keyboard.row(InlineKeyboardButton(text="Да, думаю, они могут что-то подсказать", callback_data="Discussion|15"))
@@ -89,3 +100,4 @@ async def reminder_day15(message: types.CallbackQuery, state: FSMContext, bot: B
 @is_now_day(15)
 async def balance_day15(message: types.CallbackQuery, state: FSMContext, bot: Bot):
     await Users_stat(message.from_user.id).edit_user_end_day()
+    await message.message.answer("На сегодня все👐")

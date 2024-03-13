@@ -36,16 +36,40 @@ bot = Bot(token=bot_token, parse_mode="html")
 
 async def main():
     print(await bot.get_me())
+    await message_after_start(await edit_data())
+    await asyncio.sleep(10)
     await bot.delete_webhook(drop_pending_updates=True)
     dp = Dispatcher(storage=storage)
     dp.include_routers(user_router, day_router1, day_router2, day_router3, day_router4, day_router5, day_router6,
                        day_router7, day_router8, day_router9, day_router10, day_router11, day_router12, day_router13, day_router14,
                        day_router15, day_router16, day_router17, day_router18, day_router19, day_router20, day_router21, day_router22)
     scheduler = AsyncIOScheduler()
-    scheduler.add_job(func=call_next_day, trigger="cron", hour=9, minute=59, second=0)
+    scheduler.add_job(func=call_next_day, trigger="cron", hour=9, minute=59)
     scheduler.add_job(func=call_remind_user_day, trigger="cron", hour=18, minute=30)
     scheduler.start()
     await dp.start_polling(bot)
+
+
+async def message_after_start(users_without_end):
+    for user in users_without_end:
+        user_data = Users_stat(user)
+        next_day = await user_data.get_user_next_day()
+        if next_day <= 22:
+            await user_data.edit_user_day()
+            keyboard = await confirm_keyboard(str(next_day))
+            tasks = [asyncio.create_task(bot.send_message(text=days_start_questions.get(str(next_day)), chat_id=user, reply_markup=keyboard.as_markup()))]
+            await asyncio.gather(*tasks)
+
+async def edit_data():
+    users_data = await Users_stat().get_users_stat()
+    users_without_end = []
+    for user in users_data.keys():
+        end_day = int(users_data.get(user).get("end_day"))
+        if end_day == 0:
+            users_without_end.append(user)
+    tasks = [asyncio.create_task(Users_stat(user_id).edit_day_back()) for user_id in users_data.keys()]
+    await asyncio.gather(*tasks)
+    return users_without_end
 
 
 async def remind_user(user_id, bot: Bot):

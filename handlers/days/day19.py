@@ -6,6 +6,7 @@ from aiogram.fsm.state import any_state
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 from aiogram.utils.keyboard import InlineKeyboardBuilder
 
+from db.answers import Answers
 from db.users_stat import Users_stat
 from handlers.user_handlers import start_LLIC
 from settings import InputMessage, sticker_ids
@@ -23,13 +24,18 @@ async def start_day19(message: types.CallbackQuery, state: FSMContext, bot: Bot)
             "или важной для тебя задачей. И в этом утверждении кроется ответ на вопрос, почему в одной и той же ситуации "
             "один человек начнёт паниковать, а другой останется спокоен"
         )
-        await message.message.answer("Есть идеи?")
+        question = await message.message.answer("Есть идеи?")
         await state.set_state(InputMessage.input_answer_state19_1)
+        await state.update_data(question=str(await Users_stat(message.from_user.id).get_user_day()) + ". " + question.text)
 
 
 @day_router19.message(F.text, InputMessage.input_answer_state19_1)
 @is_now_day(19)
 async def answer_day19_1(message: types.Message, state: FSMContext, bot: Bot):
+    data = await state.get_data()
+    question = data.get("question")
+    answers = Answers()
+    await answers.add_answer(question=question, answer=message.text, user_id=message.from_user.id)
     await state.clear()
     keyboard = InlineKeyboardBuilder()
     keyboard.row(InlineKeyboardButton(text="Погнали", callback_data="Pognali|19"))
@@ -70,30 +76,45 @@ async def continue_day19(message: types.CallbackQuery, state: FSMContext, bot: B
 @day_router19.callback_query(Text(text="REMEMBER|19"))
 @is_now_day(19)
 async def continue_reflexive_day19(message: types.CallbackQuery, state: FSMContext, bot: Bot):
-    await message.message.answer("Какой из инструментов тебе бы лучше подошёл в данной ситуации: "
+    question = await message.message.answer("Какой из инструментов тебе бы лучше подошёл в данной ситуации: "
                          "представить, как ты будешь относиться к этой ситуации через пару десятков лет, "
                          "какой может быть самый худший вариант развития событий и что ты будешь делать, "
                          "если он произойдёт, или найти положительные аспекты данного поворота событий?")
     await state.set_state(InputMessage.input_answer_state19_3)
+    await state.update_data(question=str(await Users_stat(message.from_user.id).get_user_day()) + ". " + question.text)
 
 
 @day_router19.message(F.text, InputMessage.input_answer_state19_3)
 @is_now_day(19)
 async def answer_day19_3(message: types.Message, state: FSMContext, bot: Bot):
-    await message.answer("И что бы ты тогда стал думать о ситуации?")
+    data = await state.get_data()
+    question = data.get("question")
+    answers = Answers()
+    await answers.add_answer(question=question, answer=message.text, user_id=message.from_user.id)
+    question = await message.answer("И что бы ты тогда стал думать о ситуации?")
     await state.set_state(InputMessage.input_answer_state19_4)
+    await state.update_data(question=str(await Users_stat(message.from_user.id).get_user_day()) + ". " + question.text)
 
 
 @day_router19.message(F.text, InputMessage.input_answer_state19_4)
 @is_now_day(19)
 async def answer_day19_4(message: types.Message, state: FSMContext, bot: Bot):
-    await message.answer("Какие положительные мысли ты бы хотел закрепить?")
+    data = await state.get_data()
+    question = data.get("question")
+    answers = Answers()
+    await answers.add_answer(question=question, answer=message.text, user_id=message.from_user.id)
+    question = await message.answer("Какие положительные мысли ты бы хотел закрепить?")
     await state.set_state(InputMessage.input_answer_state19_5)
+    await state.update_data(question=str(await Users_stat(message.from_user.id).get_user_day()) + ". " + question.text)
 
 
 @day_router19.message(F.text, InputMessage.input_answer_state19_5)
 @is_now_day(19)
 async def answer_day19_5(message: types.Message, state: FSMContext, bot: Bot):
+    data = await state.get_data()
+    question = data.get("question")
+    answers = Answers()
+    await answers.add_answer(question=question, answer=message.text, user_id=message.from_user.id)
     await state.clear()
     keyboard = InlineKeyboardBuilder()
     keyboard.row(InlineKeyboardButton(text="Да", callback_data="YES_ZAKREP|19"))
@@ -108,23 +129,33 @@ async def answer_day19_5(message: types.Message, state: FSMContext, bot: Bot):
 @is_now_day(19)
 async def continue_reflexive_day19(message: types.CallbackQuery | types.Message, state: FSMContext, bot: Bot):
     if type(message) == types.CallbackQuery:
-        await message.message.answer("Отлично! Какой из инструментов ты бы хотел использовать завтра в случае возникновения напряжения?")
+        question = await message.message.answer("Отлично! Какой из инструментов ты бы хотел использовать завтра в случае возникновения напряжения?")
     else:
-        await message.answer(
+        data = await state.get_data()
+        question = data.get("question")
+        answers = Answers()
+        await answers.add_answer(question=question, answer=message.text, user_id=message.from_user.id)
+        question = await message.answer(
             "Отлично! Какой из инструментов ты бы хотел использовать завтра в случае возникновения напряжения?")
     await state.set_state(InputMessage.input_answer_state19_6)
+    await state.update_data(question=str(await Users_stat(message.from_user.id).get_user_day()) + ". " + question.text)
 
 
 @day_router19.callback_query(Text(text="NO_ZAKREP|19"))
 @is_now_day(19)
 async def continue_reflexive_day19(message: types.CallbackQuery, state: FSMContext, bot: Bot):
-    await message.message.answer("Давай попробуем ещё раз")
+    question = await message.message.answer("Давай попробуем ещё раз")
     await state.set_state(InputMessage.input_answer_state19_7)
+    await state.update_data(question=str(await Users_stat(message.from_user.id).get_user_day()) + ". " + question.text)
 
 
 @day_router19.message(F.text, InputMessage.input_answer_state19_6)
 @is_now_day(19)
 async def answer_day19_4(message: types.Message, state: FSMContext, bot: Bot):
+    data = await state.get_data()
+    question = data.get("question")
+    answers = Answers()
+    await answers.add_answer(question=question, answer=message.text, user_id=message.from_user.id)
     await message.answer("Одобряем! Увидимся завтра 😉")
     await state.clear()
     await Users_stat(message.from_user.id).edit_user_end_day()
