@@ -1,13 +1,12 @@
 {
   "774127719": {
     "day_now": 2,
-    "end_day": 1,
-    "last_LLIC": 2,
+    "end_day": 0,
+    "last_LLIC": 1,
     "end_LLIC": 1,
     "last_statements": 1,
     "end_statements": 1,
     "LLIC_results": [
-      52,
       52
     ]
   },
