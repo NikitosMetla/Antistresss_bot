@@ -36,12 +36,6 @@ async def start(message: types.Message, state: FSMContext, bot: Bot):
     await message.answer_document(document=FSInputFile("data/feed_back.xlsx"))
 
 
-@user_router.message(Text(text="/contact_us"))
-async def start(message: types.CallbackQuery, state: FSMContext, bot: Bot):
-    await state.set_state(InputMessage.connect_us)
-    await message.answer("Введите ваше обращение")
-
-
 @user_router.message(F.text, InputMessage.connect_us)
 async def start(message: types.Message, state: FSMContext, bot: Bot):
     await state.clear()
