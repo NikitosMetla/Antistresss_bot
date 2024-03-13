@@ -36,7 +36,8 @@ bot = Bot(token=bot_token, parse_mode="html")
 
 async def main():
     print(await bot.get_me())
-    await message_after_start(await edit_data())
+    data = await edit_data()
+    await message_after_start(data)
     await asyncio.sleep(10)
     await bot.delete_webhook(drop_pending_updates=True)
     dp = Dispatcher(storage=storage)
