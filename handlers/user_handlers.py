@@ -36,17 +36,6 @@ async def start(message: types.Message, state: FSMContext, bot: Bot):
     await message.answer_document(document=FSInputFile("data/feed_back.xlsx"))
 
 
-@user_router.message(F.text, InputMessage.connect_us)
-async def start(message: types.Message, state: FSMContext, bot: Bot):
-    await state.clear()
-    admin_id = await Admin().get_admins()
-    admin_id = admin_id[1]
-    keyboard = InlineKeyboardBuilder()
-    keyboard.row(InlineKeyboardButton(text="Ответить пользователю", callback_data=f"admin_answer_user|{message.from_user.id}"))
-    await bot.send_message(chat_id=admin_id, text=f"Сообщение от пользователя с id {message.from_user.id}:\n{message.text}",
-                           reply_markup=keyboard.as_markup())
-
-
 @user_router.callback_query(Text(startswith="admin_answer_user|"), any_state)
 async def start(message: types.CallbackQuery, state: FSMContext, bot: Bot):
     data = message.data.split("|")
@@ -267,7 +256,6 @@ async def start_LLIC(call: types.CallbackQuery | types.Message, state: FSMContex
 
 
 @user_router.message(F.text, InputMessage.oprosnik1_state)
-@is_now_day(0)
 async def start(message: types.Message, state: FSMContext, bot: Bot):
     return
 
@@ -426,3 +414,14 @@ async def start_statement_next_days(message: types.Message | types.CallbackQuery
 async def dinamic_22(message: types.CallbackQuery, state: FSMContext, bot: Bot):
     await message.message.answer("Как ты думаешь, с чем связана такая динамика?")
     await state.set_state(InputMessage.input_answer_state22_100)
+
+
+@user_router.message(F.text, InputMessage.connect_us)
+async def start(message: types.Message, state: FSMContext, bot: Bot):
+    await state.clear()
+    admin_id = await Admin().get_admins()
+    admin_id = admin_id[1]
+    keyboard = InlineKeyboardBuilder()
+    keyboard.row(InlineKeyboardButton(text="Ответить пользователю", callback_data=f"admin_answer_user|{message.from_user.id}"))
+    await bot.send_message(chat_id=admin_id, text=f"Сообщение от пользователя с id {message.from_user.id}:\n{message.text}",
+                           reply_markup=keyboard.as_markup())
