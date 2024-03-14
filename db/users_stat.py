@@ -61,7 +61,7 @@ class Users_stat:
             await self.edit_user_LLIC()
         return int(self.users.get(self.user_id).get("last_LLIC"))
 
-    async def edit_user_day(self, edit_day_stat: bool | None):
+    async def edit_user_day(self, edit_day_stat: bool | None = None):
         next_day = int(self.users.get(self.user_id).get('day_now')) + 1
         self.users[self.user_id]["day_now"] = next_day
         self.users[self.user_id]["end_day"] = 0
