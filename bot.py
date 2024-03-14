@@ -59,10 +59,13 @@ async def message_after_start(users_without_end):
         user_data = Users_stat(user)
         next_day = int(await user_data.get_user_day()) + 1
         print(next_day)
-        if next_day <= 22:
-            await user_data.edit_user_day(edit_day_stat=False)
-            keyboard = await confirm_keyboard(str(next_day))
-            await bot.send_message(text=days_start_questions.get(str(next_day)), chat_id=user, reply_markup=keyboard.as_markup())
+        try:
+            if next_day <= 22:
+                await user_data.edit_user_day(edit_day_stat=False)
+                keyboard = await confirm_keyboard(str(next_day))
+                await bot.send_message(text=days_start_questions.get(str(next_day)), chat_id=user, reply_markup=keyboard.as_markup())
+        except:
+            continue
 
 async def edit_data():
     users_data = await Users_stat().get_users_stat()
@@ -81,9 +84,12 @@ async def edit_data():
 
 
 async def remind_user(user_id, bot: Bot):
-    day = await Users_stat(user_id).get_user_day()
-    if not(await Users_stat(user_id).get_user_end_day()) and day not in [5, 6, 7, 8, 9, 10, 11, 12, 14]:
-        await bot.send_message(chat_id=user_id, text="Ты куда пропал?) Давай закончим сегодняшнее задание, осталось немного!)")
+    try:
+        day = await Users_stat(user_id).get_user_day()
+        if not(await Users_stat(user_id).get_user_end_day()) and day not in [5, 6, 7, 8, 9, 10, 11, 12, 14]:
+            await bot.send_message(chat_id=user_id, text="Ты куда пропал?) Давай закончим сегодняшнее задание, осталось немного!)")
+    except:
+        return
 
 
 async def call_remind_user_day():
@@ -93,15 +99,17 @@ async def call_remind_user_day():
 
 
 async def mailing_next_day(next_day: int, user_id, replace: bool, bot: Bot):
+    try:
     user = Users_stat(user_id)
-    if next_day <= 22:
-        if replace:
-            await user.edit_user_day()
-            keyboard = await confirm_keyboard(str(next_day))
-            await bot.send_message(text=days_start_questions.get(str(next_day)), chat_id=user_id, reply_markup=keyboard.as_markup())
-        else:
-            await bot.send_message(text="Мы остановились с тобой на кое-чем интересном! Ответь, пожалуйста, на последний заданный вопрос или продолжи программу!", chat_id=user_id)
-
+        if next_day <= 22:
+            if replace:
+                await user.edit_user_day()
+                keyboard = await confirm_keyboard(str(next_day))
+                await bot.send_message(text=days_start_questions.get(str(next_day)), chat_id=user_id, reply_markup=keyboard.as_markup())
+            else:
+                await bot.send_message(text="Мы остановились с тобой на кое-чем интересном! Ответь, пожалуйста, на последний заданный вопрос или продолжи программу!", chat_id=user_id)
+    except:
+        return
 
 async def call_next_day():
     users_data = await Users_stat().get_users_stat()
