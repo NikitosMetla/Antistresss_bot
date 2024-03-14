@@ -41,7 +41,7 @@ async def main():
     await message_after_start(data)
     await asyncio.sleep(5)
     await call_next_day()
-    await asyncio.sleep(10)
+    await asyncio.sleep(5)
     await bot.delete_webhook(drop_pending_updates=True)
     dp = Dispatcher(storage=storage)
     dp.include_routers(user_router, day_router1, day_router2, day_router3, day_router4, day_router5, day_router6,
