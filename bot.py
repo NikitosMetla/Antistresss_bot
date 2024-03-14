@@ -101,13 +101,13 @@ async def call_remind_user_day():
 async def mailing_next_day(next_day: int, user_id, replace: bool, bot: Bot):
     try:
         user = Users_stat(user_id)
-            if next_day <= 22:
-                if replace:
-                    await user.edit_user_day()
-                    keyboard = await confirm_keyboard(str(next_day))
-                    await bot.send_message(text=days_start_questions.get(str(next_day)), chat_id=user_id, reply_markup=keyboard.as_markup())
-                else:
-                    await bot.send_message(text="Мы остановились с тобой на кое-чем интересном! Ответь, пожалуйста, на последний заданный вопрос или продолжи программу!", chat_id=user_id)
+        if next_day <= 22:
+            if replace:
+                await user.edit_user_day()
+                keyboard = await confirm_keyboard(str(next_day))
+                await bot.send_message(text=days_start_questions.get(str(next_day)), chat_id=user_id, reply_markup=keyboard.as_markup())
+            else:
+                await bot.send_message(text="Мы остановились с тобой на кое-чем интересном! Ответь, пожалуйста, на последний заданный вопрос или продолжи программу!", chat_id=user_id)
     except:
         return
 
