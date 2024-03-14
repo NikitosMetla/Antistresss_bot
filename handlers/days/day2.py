@@ -15,12 +15,11 @@ day_router1 = Router()
 @day_router1.callback_query(Text(text="confirm|1"))
 @is_now_day(1)
 async def start_day1(message: types.CallbackQuery, state: FSMContext, bot: Bot):
-    if int(str(await Users_stat(message.from_user.id).get_user_day())) == int(message.data.split("|")[1]):
-        await state.clear()
-        question = await message.message.answer("Для начала разберёмся, что вообще такое стресс. Что ты понимаешь под стрессом?")
-        await state.set_state(InputMessage.input_answer_state1)
-        await state.update_data(question=str(await Users_stat(message.from_user.id).get_user_day()) + ". " + question.text)
-        await message.message.delete()
+    await state.clear()
+    question = await message.message.answer("Для начала разберёмся, что вообще такое стресс. Что ты понимаешь под стрессом?")
+    await state.set_state(InputMessage.input_answer_state1)
+    await state.update_data(question=str(await Users_stat(message.from_user.id).get_user_day()) + ". " + question.text)
+    await message.message.delete()
 
 
 @day_router1.message(F.text, InputMessage.input_answer_state1)
