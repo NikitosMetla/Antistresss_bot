@@ -39,6 +39,8 @@ async def main():
     data = await edit_data()
     await asyncio.sleep(10)
     await message_after_start(data)
+    await asyncio.sleep(5)
+    await call_next_day()
     await asyncio.sleep(10)
     await bot.delete_webhook(drop_pending_updates=True)
     dp = Dispatcher(storage=storage)
@@ -60,7 +62,7 @@ async def message_after_start(users_without_end):
         if next_day <= 22:
             await user_data.edit_user_day(edit_day_stat=False)
             keyboard = await confirm_keyboard(str(next_day))
-            await bot.send_message(text="<b>Просим тебя пройти незаконченный тобой день по причине проведения работ  на сервере. Приносим извинения за предоставленные неудобства</b>\n" + days_start_questions.get(str(next_day)), chat_id=user, reply_markup=keyboard.as_markup())
+            await bot.send_message(text=days_start_questions.get(str(next_day)), chat_id=user, reply_markup=keyboard.as_markup())
 
 async def edit_data():
     users_data = await Users_stat().get_users_stat()
