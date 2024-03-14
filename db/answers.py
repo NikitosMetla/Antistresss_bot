@@ -11,7 +11,7 @@ class Answers:
     async def add_new_user(self, user_id: str | int):
         if user_id not in self.users.index:
             self.user_id = int(user_id)
-            self.users.loc[self.user_id] = ["1"]
+            self.users.loc[self.user_id] = ["1"] + [None] * (len(self.users.columns) - 1)
             await self.save_data()
 
     async def add_answer(self, question: str, answer: str, user_id: str | int):
