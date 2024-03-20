@@ -40,8 +40,6 @@ async def main():
     await asyncio.sleep(10)
     await message_after_start(data)
     await asyncio.sleep(5)
-    await call_next_day()
-    await asyncio.sleep(5)
     await bot.delete_webhook(drop_pending_updates=True)
     dp = Dispatcher(storage=storage)
     dp.include_routers(user_router, day_router1, day_router2, day_router3, day_router4, day_router5, day_router6,
@@ -58,12 +56,12 @@ async def message_after_start(users_without_end):
     for user in users_without_end:
         user_data = Users_stat(user)
         next_day = int(await user_data.get_user_day()) + 1
-        print(next_day)
         try:
             if next_day <= 22:
                 await user_data.edit_user_day(edit_day_stat=False)
                 keyboard = await confirm_keyboard(str(next_day))
-                await bot.send_message(text=days_start_questions.get(str(next_day)), chat_id=user, reply_markup=keyboard.as_markup())
+                await bot.send_message(text="Привет) Очень ждали сообщения от тебя вчера, но, видимо, что-то пошло не так :(\n\nДавай пройдем программу дня ещё раз, чтобы закрепить прогресс!n"
+                                            + days_start_questions.get(str(next_day)), chat_id=user, reply_markup=keyboard.as_markup())
         except:
             continue
 
@@ -79,7 +77,6 @@ async def edit_data():
     # tasks = [asyncio.create_task(Users_stat(users).edit_day_back()) for users in users_data]
     # await asyncio.gather(*tasks)
     users_data = await Users_stat().get_users_stat()
-    print(users_data)
     return users_without_end
 
 
@@ -106,6 +103,8 @@ async def mailing_next_day(next_day: int, user_id, replace: bool, bot: Bot):
                 await user.edit_user_day()
                 keyboard = await confirm_keyboard(str(next_day))
                 await bot.send_message(text=days_start_questions.get(str(next_day)), chat_id=user_id, reply_markup=keyboard.as_markup())
+            elif await user.get_user_day() in [5, 6, 7, 8, 9, 10, 11, 12, 14]:
+                return
             else:
                 await bot.send_message(text="Мы остановились с тобой на кое-чем интересном! Ответь, пожалуйста, на последний заданный вопрос или продолжи программу!", chat_id=user_id)
     except:

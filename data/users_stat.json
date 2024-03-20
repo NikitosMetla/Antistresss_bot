@@ -1,61 +1,73 @@
 {
   "774127719": {
-    "day_now": 2,
+    "day_now": 8,
     "end_day": 1,
-    "last_LLIC": 2,
+    "last_LLIC": 5,
     "end_LLIC": 1,
     "last_statements": 1,
     "end_statements": 1,
     "LLIC_results": [
       52,
-      52
+      52,
+      33,
+      69,
+      29
     ]
   },
   "965046780": {
-    "day_now": 2,
+    "day_now": 7,
     "end_day": 1,
-    "last_LLIC": 2,
+    "last_LLIC": 4,
     "end_LLIC": 1,
     "last_statements": 1,
     "end_statements": 1,
     "LLIC_results": [
       52,
-      34
+      34,
+      29,
+      31
     ]
   },
   "327254001": {
-    "day_now": 2,
+    "day_now": 6,
     "end_day": 1,
-    "last_LLIC": 2,
+    "last_LLIC": 4,
     "end_LLIC": 1,
     "last_statements": 1,
     "end_statements": 1,
     "LLIC_results": [
       52,
-      46
+      46,
+      46,
+      30
     ]
   },
   "224473558": {
-    "day_now": 2,
+    "day_now": 8,
     "end_day": 1,
-    "last_LLIC": 2,
+    "last_LLIC": 5,
     "end_LLIC": 1,
     "last_statements": 1,
     "end_statements": 1,
     "LLIC_results": [
       52,
-      47
+      47,
+      41,
+      29,
+      36
     ]
   },
   "5729645721": {
-    "day_now": 0,
+    "day_now": 5,
     "end_day": 1,
-    "last_LLIC": 1,
+    "last_LLIC": 3,
     "end_LLIC": 1,
     "last_statements": 1,
     "end_statements": 1,
     "LLIC_results": [
-      40
+      40,
+      28,
+      33
     ]
   },
   "1448073091": {
@@ -68,36 +80,43 @@
     "LLIC_results": []
   },
   "723998850": {
-    "day_now": 0,
-    "end_day": 1,
-    "last_LLIC": 1,
+    "day_now": 6,
+    "end_day": 0,
+    "last_LLIC": 3,
     "end_LLIC": 1,
     "last_statements": 1,
     "end_statements": 1,
     "LLIC_results": [
-      35
+      35,
+      39,
+      40
     ]
   },
   "1089340083": {
-    "day_now": 0,
-    "end_day": 1,
-    "last_LLIC": 1,
+    "day_now": 5,
+    "end_day": 0,
+    "last_LLIC": 3,
     "end_LLIC": 1,
     "last_statements": 1,
     "end_statements": 1,
     "LLIC_results": [
-      41
+      41,
+      40,
+      47
     ]
   },
   "278434465": {
-    "day_now": 0,
+    "day_now": 6,
     "end_day": 1,
-    "last_LLIC": 1,
+    "last_LLIC": 4,
     "end_LLIC": 1,
     "last_statements": 1,
     "end_statements": 1,
     "LLIC_results": [
-      38
+      38,
+      47,
+      53,
+      48
     ]
   },
   "326741199": {
@@ -137,55 +156,64 @@
     "LLIC_results": []
   },
   "494661487": {
-    "day_now": 0,
+    "day_now": 2,
     "end_day": 0,
-    "last_LLIC": 1,
-    "end_LLIC": 0,
-    "last_statements": 1,
-    "end_statements": 0,
-    "LLIC_results": []
-  },
-  "334574277": {
-    "day_now": 0,
-    "end_day": 1,
     "last_LLIC": 1,
     "end_LLIC": 1,
     "last_statements": 1,
     "end_statements": 1,
     "LLIC_results": [
-      30
+      28
+    ]
+  },
+  "334574277": {
+    "day_now": 4,
+    "end_day": 0,
+    "last_LLIC": 3,
+    "end_LLIC": 0,
+    "last_statements": 1,
+    "end_statements": 1,
+    "LLIC_results": [
+      30,
+      33
     ]
   },
   "390939673": {
-    "day_now": 0,
+    "day_now": 6,
     "end_day": 1,
-    "last_LLIC": 1,
+    "last_LLIC": 4,
     "end_LLIC": 1,
     "last_statements": 1,
     "end_statements": 1,
     "LLIC_results": [
+      24,
+      26,
+      35,
       24
     ]
   },
   "341161035": {
-    "day_now": 0,
-    "end_day": 1,
+    "day_now": 3,
+    "end_day": 0,
+    "last_LLIC": 2,
+    "end_LLIC": 1,
+    "last_statements": 1,
+    "end_statements": 1,
+    "LLIC_results": [
+      29,
+      29
+    ]
+  },
+  "475146497": {
+    "day_now": 1,
+    "end_day": 0,
     "last_LLIC": 1,
     "end_LLIC": 1,
     "last_statements": 1,
     "end_statements": 1,
     "LLIC_results": [
-      29
+      52
     ]
-  },
-  "475146497": {
-    "day_now": 0,
-    "end_day": 0,
-    "last_LLIC": 1,
-    "end_LLIC": 0,
-    "last_statements": 1,
-    "end_statements": 0,
-    "LLIC_results": []
   },
   "1994741118": {
     "day_now": 0,
@@ -197,41 +225,48 @@
     "LLIC_results": []
   },
   "450524604": {
-    "day_now": 0,
+    "day_now": 6,
     "end_day": 1,
-    "last_LLIC": 1,
+    "last_LLIC": 4,
     "end_LLIC": 1,
     "last_statements": 1,
     "end_statements": 1,
     "LLIC_results": [
-      37
+      37,
+      40,
+      31,
+      14
     ]
   },
   "1084001580": {
-    "day_now": 0,
+    "day_now": 5,
     "end_day": 1,
-    "last_LLIC": 1,
+    "last_LLIC": 3,
     "end_LLIC": 1,
     "last_statements": 1,
     "end_statements": 1,
     "LLIC_results": [
-      45
+      45,
+      45,
+      43
     ]
   },
   "940843975": {
-    "day_now": 0,
-    "end_day": 1,
-    "last_LLIC": 1,
+    "day_now": 6,
+    "end_day": 0,
+    "last_LLIC": 3,
     "end_LLIC": 1,
     "last_statements": 1,
     "end_statements": 1,
     "LLIC_results": [
-      23
+      23,
+      35,
+      48
     ]
   },
   "1575877520": {
-    "day_now": 0,
-    "end_day": 1,
+    "day_now": 1,
+    "end_day": 0,
     "last_LLIC": 1,
     "end_LLIC": 1,
     "last_statements": 1,
@@ -241,30 +276,35 @@
     ]
   },
   "1090068568": {
-    "day_now": 0,
-    "end_day": 1,
-    "last_LLIC": 1,
+    "day_now": 5,
+    "end_day": 0,
+    "last_LLIC": 3,
     "end_LLIC": 1,
     "last_statements": 1,
     "end_statements": 1,
     "LLIC_results": [
-      41
+      41,
+      36,
+      37
     ]
   },
   "609235525": {
-    "day_now": 0,
+    "day_now": 6,
     "end_day": 1,
-    "last_LLIC": 1,
+    "last_LLIC": 4,
     "end_LLIC": 1,
     "last_statements": 1,
     "end_statements": 1,
     "LLIC_results": [
-      15
+      15,
+      16,
+      14,
+      17
     ]
   },
   "542035643": {
-    "day_now": 0,
-    "end_day": 1,
+    "day_now": 1,
+    "end_day": 0,
     "last_LLIC": 1,
     "end_LLIC": 1,
     "last_statements": 1,
@@ -274,8 +314,8 @@
     ]
   },
   "914254306": {
-    "day_now": 0,
-    "end_day": 1,
+    "day_now": 1,
+    "end_day": 0,
     "last_LLIC": 1,
     "end_LLIC": 1,
     "last_statements": 1,
@@ -285,45 +325,53 @@
     ]
   },
   "347293217": {
-    "day_now": 0,
-    "end_day": 0,
-    "last_LLIC": 1,
-    "end_LLIC": 0,
-    "last_statements": 1,
-    "end_statements": 0,
-    "LLIC_results": []
-  },
-  "1894972636": {
-    "day_now": 0,
+    "day_now": 2,
     "end_day": 1,
-    "last_LLIC": 1,
+    "last_LLIC": 2,
     "end_LLIC": 1,
     "last_statements": 1,
     "end_statements": 1,
     "LLIC_results": [
-      45
+      38,
+      53
+    ]
+  },
+  "1894972636": {
+    "day_now": 5,
+    "end_day": 0,
+    "last_LLIC": 3,
+    "end_LLIC": 1,
+    "last_statements": 1,
+    "end_statements": 1,
+    "LLIC_results": [
+      45,
+      43,
+      34
     ]
   },
   "948849886": {
-    "day_now": 0,
-    "end_day": 1,
-    "last_LLIC": 1,
+    "day_now": 5,
+    "end_day": 0,
+    "last_LLIC": 3,
     "end_LLIC": 1,
     "last_statements": 1,
     "end_statements": 1,
     "LLIC_results": [
-      26
+      26,
+      34,
+      32
     ]
   },
   "547555788": {
-    "day_now": 0,
-    "end_day": 1,
-    "last_LLIC": 1,
+    "day_now": 3,
+    "end_day": 0,
+    "last_LLIC": 2,
     "end_LLIC": 1,
     "last_statements": 1,
     "end_statements": 1,
     "LLIC_results": [
-      34
+      34,
+      58
     ]
   },
   "606167431": {
@@ -338,14 +386,15 @@
     ]
   },
   "1430521732": {
-    "day_now": 0,
-    "end_day": 1,
-    "last_LLIC": 1,
+    "day_now": 3,
+    "end_day": 0,
+    "last_LLIC": 2,
     "end_LLIC": 1,
     "last_statements": 1,
     "end_statements": 1,
     "LLIC_results": [
-      33
+      33,
+      43
     ]
   },
   "822564272": {
@@ -367,34 +416,42 @@
     "LLIC_results": []
   },
   "929521834": {
-    "day_now": 0,
-    "end_day": 0,
-    "last_LLIC": 1,
-    "end_LLIC": 0,
-    "last_statements": 1,
-    "end_statements": 0,
-    "LLIC_results": []
-  },
-  "335590148": {
-    "day_now": 0,
+    "day_now": 4,
     "end_day": 1,
-    "last_LLIC": 1,
+    "last_LLIC": 3,
     "end_LLIC": 1,
     "last_statements": 1,
     "end_statements": 1,
     "LLIC_results": [
-      38
+      51,
+      47,
+      45
+    ]
+  },
+  "335590148": {
+    "day_now": 6,
+    "end_day": 1,
+    "last_LLIC": 4,
+    "end_LLIC": 1,
+    "last_statements": 1,
+    "end_statements": 1,
+    "LLIC_results": [
+      38,
+      39,
+      30,
+      22
     ]
   },
   "815209358": {
-    "day_now": 0,
-    "end_day": 1,
-    "last_LLIC": 1,
+    "day_now": 3,
+    "end_day": 0,
+    "last_LLIC": 2,
     "end_LLIC": 1,
     "last_statements": 1,
     "end_statements": 1,
     "LLIC_results": [
-      45
+      45,
+      28
     ]
   },
   "888026216": {
@@ -407,52 +464,55 @@
     "LLIC_results": []
   },
   "1141107559": {
-    "day_now": 0,
-    "end_day": 0,
+    "day_now": 1,
+    "end_day": 1,
     "last_LLIC": 1,
     "end_LLIC": 1,
     "last_statements": 1,
-    "end_statements": 0,
+    "end_statements": 1,
     "LLIC_results": [
       31
     ]
   },
   "1282100995": {
-    "day_now": 0,
-    "end_day": 1,
-    "last_LLIC": 1,
+    "day_now": 3,
+    "end_day": 0,
+    "last_LLIC": 2,
     "end_LLIC": 1,
     "last_statements": 1,
     "end_statements": 1,
     "LLIC_results": [
-      31
+      31,
+      32
     ]
   },
   "277709761": {
-    "day_now": 0,
-    "end_day": 1,
-    "last_LLIC": 1,
+    "day_now": 3,
+    "end_day": 0,
+    "last_LLIC": 2,
     "end_LLIC": 1,
     "last_statements": 1,
     "end_statements": 1,
     "LLIC_results": [
+      55,
       55
     ]
   },
   "987872134": {
-    "day_now": 0,
-    "end_day": 1,
-    "last_LLIC": 1,
+    "day_now": 3,
+    "end_day": 0,
+    "last_LLIC": 2,
     "end_LLIC": 1,
     "last_statements": 1,
     "end_statements": 1,
     "LLIC_results": [
-      29
+      29,
+      52
     ]
   },
   "6014562495": {
-    "day_now": 0,
-    "end_day": 1,
+    "day_now": 1,
+    "end_day": 0,
     "last_LLIC": 1,
     "end_LLIC": 1,
     "last_statements": 1,
@@ -471,8 +531,8 @@
     "LLIC_results": []
   },
   "1412549626": {
-    "day_now": 0,
-    "end_day": 1,
+    "day_now": 1,
+    "end_day": 0,
     "last_LLIC": 1,
     "end_LLIC": 1,
     "last_statements": 1,
@@ -491,32 +551,38 @@
     "LLIC_results": []
   },
   "1377923165": {
-    "day_now": 0,
+    "day_now": 1,
     "end_day": 0,
-    "last_LLIC": 1,
-    "end_LLIC": 0,
-    "last_statements": 1,
-    "end_statements": 0,
-    "LLIC_results": []
-  },
-  "415853378": {
-    "day_now": 0,
-    "end_day": 0,
-    "last_LLIC": 1,
-    "end_LLIC": 0,
-    "last_statements": 1,
-    "end_statements": 0,
-    "LLIC_results": []
-  },
-  "740979587": {
-    "day_now": 0,
-    "end_day": 1,
     "last_LLIC": 1,
     "end_LLIC": 1,
     "last_statements": 1,
     "end_statements": 1,
     "LLIC_results": [
-      31
+      30
+    ]
+  },
+  "415853378": {
+    "day_now": 0,
+    "end_day": 0,
+    "last_LLIC": 1,
+    "end_LLIC": 1,
+    "last_statements": 1,
+    "end_statements": 0,
+    "LLIC_results": [
+      34
+    ]
+  },
+  "740979587": {
+    "day_now": 6,
+    "end_day": 0,
+    "last_LLIC": 3,
+    "end_LLIC": 1,
+    "last_statements": 1,
+    "end_statements": 1,
+    "LLIC_results": [
+      31,
+      47,
+      43
     ]
   },
   "1374722338": {
@@ -529,8 +595,8 @@
     "LLIC_results": []
   },
   "68986006": {
-    "day_now": 0,
-    "end_day": 1,
+    "day_now": 2,
+    "end_day": 0,
     "last_LLIC": 1,
     "end_LLIC": 1,
     "last_statements": 1,
@@ -540,17 +606,19 @@
     ]
   },
   "648305412": {
-    "day_now": 0,
+    "day_now": 2,
     "end_day": 0,
     "last_LLIC": 1,
-    "end_LLIC": 0,
+    "end_LLIC": 1,
     "last_statements": 1,
-    "end_statements": 0,
-    "LLIC_results": []
+    "end_statements": 1,
+    "LLIC_results": [
+      49
+    ]
   },
   "912255988": {
-    "day_now": 0,
-    "end_day": 1,
+    "day_now": 2,
+    "end_day": 0,
     "last_LLIC": 1,
     "end_LLIC": 1,
     "last_statements": 1,
@@ -560,14 +628,16 @@
     ]
   },
   "960777578": {
-    "day_now": 0,
+    "day_now": 5,
     "end_day": 1,
-    "last_LLIC": 1,
+    "last_LLIC": 3,
     "end_LLIC": 1,
     "last_statements": 1,
     "end_statements": 1,
     "LLIC_results": [
-      37
+      37,
+      47,
+      39
     ]
   },
   "871029445": {
@@ -589,19 +659,21 @@
     "LLIC_results": []
   },
   "947998130": {
-    "day_now": 0,
-    "end_day": 1,
-    "last_LLIC": 1,
+    "day_now": 6,
+    "end_day": 0,
+    "last_LLIC": 3,
     "end_LLIC": 1,
     "last_statements": 1,
     "end_statements": 1,
     "LLIC_results": [
+      20,
+      25,
       20
     ]
   },
   "941097853": {
-    "day_now": 0,
-    "end_day": 1,
+    "day_now": 1,
+    "end_day": 0,
     "last_LLIC": 1,
     "end_LLIC": 1,
     "last_statements": 1,
@@ -622,46 +694,53 @@
     ]
   },
   "335498394": {
-    "day_now": 0,
-    "end_day": 1,
-    "last_LLIC": 1,
+    "day_now": 5,
+    "end_day": 0,
+    "last_LLIC": 3,
     "end_LLIC": 1,
     "last_statements": 1,
     "end_statements": 1,
     "LLIC_results": [
-      33
+      33,
+      25,
+      20
     ]
   },
   "1041962365": {
-    "day_now": 0,
-    "end_day": 1,
-    "last_LLIC": 1,
+    "day_now": 5,
+    "end_day": 0,
+    "last_LLIC": 3,
     "end_LLIC": 1,
     "last_statements": 1,
     "end_statements": 1,
     "LLIC_results": [
-      51
+      51,
+      42,
+      43
     ]
   },
   "1229165124": {
-    "day_now": 0,
-    "end_day": 1,
-    "last_LLIC": 1,
+    "day_now": 4,
+    "end_day": 0,
+    "last_LLIC": 2,
     "end_LLIC": 1,
     "last_statements": 1,
     "end_statements": 1,
     "LLIC_results": [
-      32
+      32,
+      45
     ]
   },
   "1186511568": {
-    "day_now": 0,
-    "end_day": 1,
-    "last_LLIC": 1,
+    "day_now": 5,
+    "end_day": 0,
+    "last_LLIC": 3,
     "end_LLIC": 1,
     "last_statements": 1,
     "end_statements": 1,
     "LLIC_results": [
+      40,
+      46,
       40
     ]
   },
@@ -684,6 +763,738 @@
     "LLIC_results": []
   },
   "1550735525": {
+    "day_now": 2,
+    "end_day": 0,
+    "last_LLIC": 1,
+    "end_LLIC": 1,
+    "last_statements": 1,
+    "end_statements": 1,
+    "LLIC_results": [
+      23
+    ]
+  },
+  "352996094": {
+    "day_now": 0,
+    "end_day": 0,
+    "last_LLIC": 1,
+    "end_LLIC": 0,
+    "last_statements": 1,
+    "end_statements": 0,
+    "LLIC_results": []
+  },
+  "977609676": {
+    "day_now": 2,
+    "end_day": 0,
+    "last_LLIC": 1,
+    "end_LLIC": 1,
+    "last_statements": 1,
+    "end_statements": 1,
+    "LLIC_results": [
+      49
+    ]
+  },
+  "342198974": {
+    "day_now": 0,
+    "end_day": 0,
+    "last_LLIC": 1,
+    "end_LLIC": 0,
+    "last_statements": 1,
+    "end_statements": 0,
+    "LLIC_results": []
+  },
+  "884203799": {
+    "day_now": 0,
+    "end_day": 0,
+    "last_LLIC": 1,
+    "end_LLIC": 0,
+    "last_statements": 1,
+    "end_statements": 0,
+    "LLIC_results": []
+  },
+  "1399782737": {
+    "day_now": 0,
+    "end_day": 0,
+    "last_LLIC": 1,
+    "end_LLIC": 0,
+    "last_statements": 1,
+    "end_statements": 0,
+    "LLIC_results": []
+  },
+  "873462379": {
+    "day_now": 0,
+    "end_day": 0,
+    "last_LLIC": 1,
+    "end_LLIC": 0,
+    "last_statements": 1,
+    "end_statements": 0,
+    "LLIC_results": []
+  },
+  "267224174": {
+    "day_now": 2,
+    "end_day": 0,
+    "last_LLIC": 1,
+    "end_LLIC": 1,
+    "last_statements": 1,
+    "end_statements": 1,
+    "LLIC_results": [
+      31
+    ]
+  },
+  "462557445": {
+    "day_now": 0,
+    "end_day": 0,
+    "last_LLIC": 1,
+    "end_LLIC": 0,
+    "last_statements": 1,
+    "end_statements": 0,
+    "LLIC_results": []
+  },
+  "531011943": {
+    "day_now": 0,
+    "end_day": 0,
+    "last_LLIC": 1,
+    "end_LLIC": 0,
+    "last_statements": 1,
+    "end_statements": 0,
+    "LLIC_results": []
+  },
+  "639284769": {
+    "day_now": 0,
+    "end_day": 0,
+    "last_LLIC": 1,
+    "end_LLIC": 0,
+    "last_statements": 1,
+    "end_statements": 0,
+    "LLIC_results": []
+  },
+  "620881490": {
+    "day_now": 0,
+    "end_day": 1,
+    "last_LLIC": 1,
+    "end_LLIC": 1,
+    "last_statements": 1,
+    "end_statements": 1,
+    "LLIC_results": [
+      56
+    ]
+  },
+  "952499115": {
+    "day_now": 0,
+    "end_day": 0,
+    "last_LLIC": 1,
+    "end_LLIC": 0,
+    "last_statements": 1,
+    "end_statements": 0,
+    "LLIC_results": []
+  },
+  "480284306": {
+    "day_now": 4,
+    "end_day": 0,
+    "last_LLIC": 2,
+    "end_LLIC": 1,
+    "last_statements": 1,
+    "end_statements": 1,
+    "LLIC_results": [
+      36,
+      26
+    ]
+  },
+  "856024184": {
+    "day_now": 2,
+    "end_day": 0,
+    "last_LLIC": 1,
+    "end_LLIC": 1,
+    "last_statements": 1,
+    "end_statements": 1,
+    "LLIC_results": [
+      55
+    ]
+  },
+  "1550095932": {
+    "day_now": 0,
+    "end_day": 0,
+    "last_LLIC": 1,
+    "end_LLIC": 0,
+    "last_statements": 1,
+    "end_statements": 0,
+    "LLIC_results": []
+  },
+  "1260060673": {
+    "day_now": 1,
+    "end_day": 0,
+    "last_LLIC": 1,
+    "end_LLIC": 1,
+    "last_statements": 1,
+    "end_statements": 1,
+    "LLIC_results": [
+      56
+    ]
+  },
+  "452227249": {
+    "day_now": 2,
+    "end_day": 0,
+    "last_LLIC": 2,
+    "end_LLIC": 0,
+    "last_statements": 1,
+    "end_statements": 1,
+    "LLIC_results": [
+      48
+    ]
+  },
+  "1126790538": {
+    "day_now": 0,
+    "end_day": 0,
+    "last_LLIC": 1,
+    "end_LLIC": 0,
+    "last_statements": 1,
+    "end_statements": 0,
+    "LLIC_results": []
+  },
+  "442968554": {
+    "day_now": 5,
+    "end_day": 0,
+    "last_LLIC": 3,
+    "end_LLIC": 1,
+    "last_statements": 1,
+    "end_statements": 1,
+    "LLIC_results": [
+      35,
+      62,
+      43
+    ]
+  },
+  "366985291": {
+    "day_now": 1,
+    "end_day": 0,
+    "last_LLIC": 1,
+    "end_LLIC": 1,
+    "last_statements": 1,
+    "end_statements": 1,
+    "LLIC_results": [
+      50
+    ]
+  },
+  "1521770280": {
+    "day_now": 0,
+    "end_day": 0,
+    "last_LLIC": 1,
+    "end_LLIC": 0,
+    "last_statements": 1,
+    "end_statements": 0,
+    "LLIC_results": []
+  },
+  "463309045": {
+    "day_now": 5,
+    "end_day": 0,
+    "last_LLIC": 3,
+    "end_LLIC": 1,
+    "last_statements": 1,
+    "end_statements": 1,
+    "LLIC_results": [
+      42,
+      43,
+      47
+    ]
+  },
+  "421090712": {
+    "day_now": 5,
+    "end_day": 1,
+    "last_LLIC": 3,
+    "end_LLIC": 1,
+    "last_statements": 1,
+    "end_statements": 1,
+    "LLIC_results": [
+      32,
+      32,
+      26
+    ]
+  },
+  "2117341170": {
+    "day_now": 1,
+    "end_day": 0,
+    "last_LLIC": 1,
+    "end_LLIC": 1,
+    "last_statements": 1,
+    "end_statements": 1,
+    "LLIC_results": [
+      55
+    ]
+  },
+  "432972537": {
+    "day_now": 0,
+    "end_day": 0,
+    "last_LLIC": 1,
+    "end_LLIC": 0,
+    "last_statements": 1,
+    "end_statements": 0,
+    "LLIC_results": []
+  },
+  "1160534283": {
+    "day_now": 0,
+    "end_day": 0,
+    "last_LLIC": 1,
+    "end_LLIC": 0,
+    "last_statements": 1,
+    "end_statements": 0,
+    "LLIC_results": []
+  },
+  "810187399": {
+    "day_now": 5,
+    "end_day": 1,
+    "last_LLIC": 3,
+    "end_LLIC": 1,
+    "last_statements": 1,
+    "end_statements": 1,
+    "LLIC_results": [
+      25,
+      20,
+      27
+    ]
+  },
+  "387143763": {
+    "day_now": 2,
+    "end_day": 0,
+    "last_LLIC": 1,
+    "end_LLIC": 1,
+    "last_statements": 1,
+    "end_statements": 1,
+    "LLIC_results": [
+      62
+    ]
+  },
+  "922667548": {
+    "day_now": 1,
+    "end_day": 0,
+    "last_LLIC": 1,
+    "end_LLIC": 1,
+    "last_statements": 1,
+    "end_statements": 1,
+    "LLIC_results": [
+      43,
+      42
+    ]
+  },
+  "434293252": {
+    "day_now": 0,
+    "end_day": 0,
+    "last_LLIC": 1,
+    "end_LLIC": 0,
+    "last_statements": 1,
+    "end_statements": 0,
+    "LLIC_results": []
+  },
+  "204032064": {
+    "day_now": 5,
+    "end_day": 0,
+    "last_LLIC": 3,
+    "end_LLIC": 1,
+    "last_statements": 1,
+    "end_statements": 1,
+    "LLIC_results": [
+      42,
+      39,
+      39,
+      50
+    ]
+  },
+  "580632276": {
+    "day_now": 5,
+    "end_day": 0,
+    "last_LLIC": 3,
+    "end_LLIC": 1,
+    "last_statements": 1,
+    "end_statements": 1,
+    "LLIC_results": [
+      53,
+      64,
+      63
+    ]
+  },
+  "796807689": {
+    "day_now": 0,
+    "end_day": 0,
+    "last_LLIC": 1,
+    "end_LLIC": 0,
+    "last_statements": 1,
+    "end_statements": 0,
+    "LLIC_results": []
+  },
+  "831643675": {
+    "day_now": 0,
+    "end_day": 0,
+    "last_LLIC": 1,
+    "end_LLIC": 1,
+    "last_statements": 1,
+    "end_statements": 0,
+    "LLIC_results": [
+      42
+    ]
+  },
+  "982890378": {
+    "day_now": 2,
+    "end_day": 0,
+    "last_LLIC": 1,
+    "end_LLIC": 1,
+    "last_statements": 1,
+    "end_statements": 1,
+    "LLIC_results": [
+      47
+    ]
+  },
+  "915833364": {
+    "day_now": 0,
+    "end_day": 0,
+    "last_LLIC": 1,
+    "end_LLIC": 0,
+    "last_statements": 1,
+    "end_statements": 0,
+    "LLIC_results": []
+  },
+  "493335372": {
+    "day_now": 0,
+    "end_day": 0,
+    "last_LLIC": 1,
+    "end_LLIC": 1,
+    "last_statements": 1,
+    "end_statements": 0,
+    "LLIC_results": [
+      61
+    ]
+  },
+  "1226849380": {
+    "day_now": 1,
+    "end_day": 0,
+    "last_LLIC": 1,
+    "end_LLIC": 1,
+    "last_statements": 1,
+    "end_statements": 1,
+    "LLIC_results": [
+      50
+    ]
+  },
+  "1525342532": {
+    "day_now": 4,
+    "end_day": 1,
+    "last_LLIC": 3,
+    "end_LLIC": 1,
+    "last_statements": 1,
+    "end_statements": 1,
+    "LLIC_results": [
+      34,
+      34,
+      32
+    ]
+  },
+  "1183002123": {
+    "day_now": 4,
+    "end_day": 1,
+    "last_LLIC": 3,
+    "end_LLIC": 1,
+    "last_statements": 1,
+    "end_statements": 1,
+    "LLIC_results": [
+      32,
+      40,
+      30
+    ]
+  },
+  "844240704": {
+    "day_now": 1,
+    "end_day": 0,
+    "last_LLIC": 1,
+    "end_LLIC": 1,
+    "last_statements": 1,
+    "end_statements": 1,
+    "LLIC_results": [
+      26
+    ]
+  },
+  "6351168582": {
+    "day_now": 2,
+    "end_day": 0,
+    "last_LLIC": 1,
+    "end_LLIC": 1,
+    "last_statements": 1,
+    "end_statements": 1,
+    "LLIC_results": [
+      50
+    ]
+  },
+  "493662687": {
+    "day_now": 0,
+    "end_day": 0,
+    "last_LLIC": 1,
+    "end_LLIC": 0,
+    "last_statements": 1,
+    "end_statements": 0,
+    "LLIC_results": []
+  },
+  "978215329": {
+    "day_now": 0,
+    "end_day": 0,
+    "last_LLIC": 1,
+    "end_LLIC": 0,
+    "last_statements": 1,
+    "end_statements": 0,
+    "LLIC_results": []
+  },
+  "252133838": {
+    "day_now": 0,
+    "end_day": 0,
+    "last_LLIC": 1,
+    "end_LLIC": 0,
+    "last_statements": 1,
+    "end_statements": 0,
+    "LLIC_results": []
+  },
+  "774980042": {
+    "day_now": 0,
+    "end_day": 0,
+    "last_LLIC": 1,
+    "end_LLIC": 0,
+    "last_statements": 1,
+    "end_statements": 0,
+    "LLIC_results": []
+  },
+  "1006641715": {
+    "day_now": 3,
+    "end_day": 0,
+    "last_LLIC": 2,
+    "end_LLIC": 1,
+    "last_statements": 1,
+    "end_statements": 1,
+    "LLIC_results": [
+      46,
+      37
+    ]
+  },
+  "483997906": {
+    "day_now": 1,
+    "end_day": 0,
+    "last_LLIC": 1,
+    "end_LLIC": 1,
+    "last_statements": 1,
+    "end_statements": 1,
+    "LLIC_results": [
+      33
+    ]
+  },
+  "5250349549": {
+    "day_now": 0,
+    "end_day": 0,
+    "last_LLIC": 1,
+    "end_LLIC": 0,
+    "last_statements": 1,
+    "end_statements": 0,
+    "LLIC_results": []
+  },
+  "774514580": {
+    "day_now": 0,
+    "end_day": 0,
+    "last_LLIC": 1,
+    "end_LLIC": 0,
+    "last_statements": 1,
+    "end_statements": 0,
+    "LLIC_results": []
+  },
+  "853258519": {
+    "day_now": 0,
+    "end_day": 0,
+    "last_LLIC": 1,
+    "end_LLIC": 1,
+    "last_statements": 1,
+    "end_statements": 0,
+    "LLIC_results": [
+      35
+    ]
+  },
+  "1484535043": {
+    "day_now": 0,
+    "end_day": 0,
+    "last_LLIC": 1,
+    "end_LLIC": 0,
+    "last_statements": 1,
+    "end_statements": 0,
+    "LLIC_results": []
+  },
+  "513110312": {
+    "day_now": 2,
+    "end_day": 0,
+    "last_LLIC": 1,
+    "end_LLIC": 1,
+    "last_statements": 1,
+    "end_statements": 1,
+    "LLIC_results": [
+      38
+    ]
+  },
+  "6341613249": {
+    "day_now": 1,
+    "end_day": 0,
+    "last_LLIC": 1,
+    "end_LLIC": 1,
+    "last_statements": 1,
+    "end_statements": 1,
+    "LLIC_results": [
+      43,
+      43
+    ]
+  },
+  "860739389": {
+    "day_now": 0,
+    "end_day": 0,
+    "last_LLIC": 1,
+    "end_LLIC": 0,
+    "last_statements": 1,
+    "end_statements": 0,
+    "LLIC_results": []
+  },
+  "479405036": {
+    "day_now": 0,
+    "end_day": 0,
+    "last_LLIC": 1,
+    "end_LLIC": 0,
+    "last_statements": 1,
+    "end_statements": 0,
+    "LLIC_results": []
+  },
+  "850420514": {
+    "day_now": 0,
+    "end_day": 0,
+    "last_LLIC": 1,
+    "end_LLIC": 0,
+    "last_statements": 1,
+    "end_statements": 0,
+    "LLIC_results": []
+  },
+  "518769233": {
+    "day_now": 1,
+    "end_day": 0,
+    "last_LLIC": 1,
+    "end_LLIC": 1,
+    "last_statements": 1,
+    "end_statements": 1,
+    "LLIC_results": [
+      45
+    ]
+  },
+  "5706665040": {
+    "day_now": 3,
+    "end_day": 1,
+    "last_LLIC": 2,
+    "end_LLIC": 1,
+    "last_statements": 1,
+    "end_statements": 1,
+    "LLIC_results": [
+      44,
+      26
+    ]
+  },
+  "359505449": {
+    "day_now": 2,
+    "end_day": 0,
+    "last_LLIC": 1,
+    "end_LLIC": 1,
+    "last_statements": 1,
+    "end_statements": 1,
+    "LLIC_results": [
+      31
+    ]
+  },
+  "798044305": {
+    "day_now": 0,
+    "end_day": 0,
+    "last_LLIC": 1,
+    "end_LLIC": 0,
+    "last_statements": 1,
+    "end_statements": 0,
+    "LLIC_results": []
+  },
+  "1969817026": {
+    "day_now": 1,
+    "end_day": 1,
+    "last_LLIC": 1,
+    "end_LLIC": 1,
+    "last_statements": 1,
+    "end_statements": 1,
+    "LLIC_results": [
+      16
+    ]
+  },
+  "1213068155": {
+    "day_now": 0,
+    "end_day": 0,
+    "last_LLIC": 1,
+    "end_LLIC": 0,
+    "last_statements": 1,
+    "end_statements": 0,
+    "LLIC_results": []
+  },
+  "1222003060": {
+    "day_now": 1,
+    "end_day": 1,
+    "last_LLIC": 1,
+    "end_LLIC": 1,
+    "last_statements": 1,
+    "end_statements": 1,
+    "LLIC_results": [
+      29
+    ]
+  },
+  "408500179": {
+    "day_now": 1,
+    "end_day": 1,
+    "last_LLIC": 1,
+    "end_LLIC": 1,
+    "last_statements": 1,
+    "end_statements": 1,
+    "LLIC_results": [
+      30
+    ]
+  },
+  "836861573": {
+    "day_now": 1,
+    "end_day": 1,
+    "last_LLIC": 1,
+    "end_LLIC": 1,
+    "last_statements": 1,
+    "end_statements": 1,
+    "LLIC_results": [
+      34
+    ]
+  },
+  "6122334288": {
+    "day_now": 1,
+    "end_day": 1,
+    "last_LLIC": 1,
+    "end_LLIC": 1,
+    "last_statements": 1,
+    "end_statements": 1,
+    "LLIC_results": [
+      39
+    ]
+  },
+  "942810856": {
+    "day_now": 0,
+    "end_day": 1,
+    "last_LLIC": 1,
+    "end_LLIC": 1,
+    "last_statements": 1,
+    "end_statements": 1,
+    "LLIC_results": [
+      40
+    ]
+  },
+  "692124430": {
+    "day_now": 0,
+    "end_day": 0,
+    "last_LLIC": 1,
+    "end_LLIC": 0,
+    "last_statements": 1,
+    "end_statements": 0,
+    "LLIC_results": []
+  },
+  "1068233638": {
     "day_now": 0,
     "end_day": 0,
     "last_LLIC": 1,

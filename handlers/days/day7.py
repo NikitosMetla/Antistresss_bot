@@ -19,20 +19,21 @@ day_router7 = Router()
 @day_router7.callback_query(Text(text="confirm|7"), any_state)
 @is_now_day(7)
 async def start_day7(message: types.CallbackQuery, state: FSMContext, bot: Bot):
-    if int(str(await Users_stat(message.from_user.id).get_user_day())) == int(message.data.split("|")[1]):
-        await state.clear()
-        keyboard = InlineKeyboardBuilder()
-        keyboard.row(InlineKeyboardButton(text="Ок", callback_data="OK|7"))
-        await message.message.answer("Помимо причин напряжения, мыслей и чувств в теле, которые возникают во время стресса, "
-                                     "нужно будет подмечать ещё и эмоции. Если тебе будет сложно идентифицировать свои эмоции, "
-                                     "можешь воспользоваться списком базовых эмоций, которые выделил американский психолог К.Изард:"
-                                     "\n• Интерес\n• Радость\n• Удивление\n• Горе\n• Гнев\n• Отвращение\n• Презрение\n• Страх"
-                                     "\n• Стыд\n• Вина\nНе забудь записывать всё в заметки 😉", reply_markup=keyboard.as_markup())
+    await message.message.edit_reply_markup()
+    await state.clear()
+    keyboard = InlineKeyboardBuilder()
+    keyboard.row(InlineKeyboardButton(text="Ок", callback_data="OK|7"))
+    await message.message.answer("Помимо причин напряжения, мыслей и чувств в теле, которые возникают во время стресса, "
+                                 "нужно будет подмечать ещё и эмоции. Если тебе будет сложно идентифицировать свои эмоции, "
+                                 "можешь воспользоваться списком базовых эмоций, которые выделил американский психолог К.Изард:"
+                                 "\n• Интерес\n• Радость\n• Удивление\n• Горе\n• Гнев\n• Отвращение\n• Презрение\n• Страх"
+                                 "\n• Стыд\n• Вина\nНе забудь записывать всё в заметки 😉", reply_markup=keyboard.as_markup())
 
 
 @day_router7.callback_query(Text(text="OK|7"))
 @is_now_day(7)
 async def ok_day7(message: types.CallbackQuery, state: FSMContext, bot: Bot):
+    await message.message.edit_reply_markup()
     now = datetime.now()
     target_time = datetime(now.year, now.month, now.day, 20, 38)
     if now >= target_time:

@@ -19,18 +19,20 @@ day_router6 = Router()
 @day_router6.callback_query(Text(text="confirm|6"), any_state)
 @is_now_day(6)
 async def start_day6(message: types.CallbackQuery, state: FSMContext, bot: Bot):
-    if int(str(await Users_stat(message.from_user.id).get_user_day())) == int(message.data.split("|")[1]):
-        await state.clear()
-        keyboard = InlineKeyboardBuilder()
-        keyboard.row(InlineKeyboardButton(text="Оки-доки", callback_data="OKI_DOKI|6"))
-        await message.message.answer("Сегодня мы усложним задачу: нужно будет замечать и записывать причины напряжения, "
-                                     "мысли и (барабанная дробь) ощущения в теле (помнишь, мы говорили про то, что стресс "
-                                     "по-разному проявляется на физиологическом уровне?) Вечером уточним, что тебе удалось заметить 😉", reply_markup=keyboard.as_markup())
+    await message.message.edit_reply_markup()
+    await state.clear()
+    keyboard = InlineKeyboardBuilder()
+    keyboard.row(InlineKeyboardButton(text="Оки-доки", callback_data="OKI_DOKI|6"))
+    await message.message.answer("Сегодня мы усложним задачу: нужно будет замечать и записывать причины напряжения, "
+                                 "мысли и (барабанная дробь) ощущения в теле (помнишь, мы говорили про то, что стресс "
+                                 "по-разному проявляется на физиологическом уровне?) Вечером уточним, что тебе удалось заметить 😉", reply_markup=keyboard.as_markup())
 
 
 @day_router6.callback_query(Text(text="OKI_DOKI|6"))
 @is_now_day(6)
 async def oki_doki_day6(message: types.CallbackQuery, state: FSMContext, bot: Bot):
+    await message.message.edit_reply_markup()
+    await message.message.answer("Отлично, договорились)")
     now = datetime.now()
     target_time = datetime(now.year, now.month, now.day, 20, 41)
     if now >= target_time:

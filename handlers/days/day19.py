@@ -17,16 +17,16 @@ day_router19 = Router()
 @day_router19.callback_query(Text(text="confirm|19"), any_state)
 @is_now_day(19)
 async def start_day19(message: types.CallbackQuery, state: FSMContext, bot: Bot):
-    if int(await Users_stat(message.from_user.id).get_user_day()) == int(message.data.split("|")[1]):
-        await state.clear()
-        await message.message.answer(
-            "Мы с тобой уже много говорили о том, что стресс это — состояние, которое ты испытываешь, сталкиваясь со сложной "
-            "или важной для тебя задачей. И в этом утверждении кроется ответ на вопрос, почему в одной и той же ситуации "
-            "один человек начнёт паниковать, а другой останется спокоен"
-        )
-        question = await message.message.answer("Есть идеи?")
-        await state.set_state(InputMessage.input_answer_state19_1)
-        await state.update_data(question=str(await Users_stat(message.from_user.id).get_user_day()) + ". " + question.text)
+    await message.message.edit_reply_markup()
+    await state.clear()
+    await message.message.answer(
+        "Мы с тобой уже много говорили о том, что стресс это — состояние, которое ты испытываешь, сталкиваясь со сложной "
+        "или важной для тебя задачей. И в этом утверждении кроется ответ на вопрос, почему в одной и той же ситуации "
+        "один человек начнёт паниковать, а другой останется спокоен"
+    )
+    question = await message.message.answer("Есть идеи?")
+    await state.set_state(InputMessage.input_answer_state19_1)
+    await state.update_data(question=str(await Users_stat(message.from_user.id).get_user_day()) + ". " + question.text)
 
 
 @day_router19.message(F.text, InputMessage.input_answer_state19_1)

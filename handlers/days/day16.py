@@ -17,12 +17,12 @@ day_router16 = Router()
 @day_router16.callback_query(Text(text="confirm|16"), any_state)
 @is_now_day(16)
 async def start_day16(message: types.CallbackQuery, state: FSMContext, bot: Bot):
-    if int(await Users_stat(message.from_user.id).get_user_day()) == int(message.data.split("|")[1]):
-        await state.clear()
-        keyboard = InlineKeyboardBuilder()
-        keyboard.row(InlineKeyboardButton(text="Да, есть такое😄", callback_data="UnderstandingProblem|16"))
-        await message.message.answer(
-            "Наверняка ты замечал, что если ты не понимаешь, зачем ты делаешь ту или иную работу/выполняешь задание в университете, процесс становится невероятно тяжелым, затягивается или вовсе откладывается, пока тебе о нём не напомнят.", reply_markup=keyboard.as_markup())
+    await message.message.edit_reply_markup()
+    await state.clear()
+    keyboard = InlineKeyboardBuilder()
+    keyboard.row(InlineKeyboardButton(text="Да, есть такое😄", callback_data="UnderstandingProblem|16"))
+    await message.message.answer(
+        "Наверняка ты замечал, что если ты не понимаешь, зачем ты делаешь ту или иную работу/выполняешь задание в университете, процесс становится невероятно тяжелым, затягивается или вовсе откладывается, пока тебе о нём не напомнят.", reply_markup=keyboard.as_markup())
 
 
 @day_router16.callback_query(Text(text="UnderstandingProblem|16"))
@@ -84,6 +84,7 @@ async def answer_day16_3(message: types.CallbackQuery, state: FSMContext, bot: B
 @day_router16.callback_query(Text(text="ALWAYS_DO|16"))
 @is_now_day(16)
 async def answer_day16_4(message: types.CallbackQuery, state: FSMContext, bot: Bot):
+    await message.message.edit_reply_markup()
     await message.message.answer_sticker(sticker=sticker_ids[-5])
     question = await message.message.answer(
         "Ещё один аспект, про который мы поговорим сегодня — мотивация."

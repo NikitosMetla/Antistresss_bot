@@ -36,14 +36,22 @@ async def start(message: types.Message, state: FSMContext, bot: Bot):
     await message.answer_document(document=FSInputFile("data/feed_back.xlsx"))
 
 
+@user_router.callback_query(Text(text="cancel_answer"), any_state)
+async def start(message: types.CallbackQuery, state: FSMContext, bot: Bot):
+    await state.clear()
+    await message.message.delete()
+
+
 @user_router.callback_query(Text(startswith="admin_answer_user|"), any_state)
 async def start(message: types.CallbackQuery, state: FSMContext, bot: Bot):
     data = message.data.split("|")
     user_id = data[1]
     message_delete = message.message.message_id
     await state.set_state(InputMessage.answer_admin_to_user)
-    await state.update_data(user_id=user_id, message_delete=message_delete)
-    await message.message.answer(f"Ты отвечаешь пользователю с id {user_id}")
+    keyboard = InlineKeyboardBuilder()
+    keyboard.row(InlineKeyboardButton(text="Отмена", callback_data="cancel_answer"))
+    answer = await message.message.answer(f"Ты отвечаешь пользователю с id {user_id}", reply_markup=keyboard.as_markup())
+    await state.update_data(user_id=user_id, message_delete=message_delete, message_id=answer.message_id)
 
 
 @user_router.message(F.text, InputMessage.answer_admin_to_user)
@@ -67,7 +75,9 @@ async def start(message: types.Message, state: FSMContext, bot: Bot):
         await state.clear()
         keyboard = await confirm_keyboard(0)
         await message.answer(start_text, reply_markup=keyboard.as_markup())
-        await message.delete()
+        if message:
+            await message.delete()
+        # await message.delete()
     else:
         await message.reply("Ты уже прошел этап знакомства, продолжи с того момента,"
                             " где ты в последний раз остановился!")
@@ -76,11 +86,12 @@ async def start(message: types.Message, state: FSMContext, bot: Bot):
 
 @user_router.callback_query(Text(text="confirm|0"), any_state)
 async def start(message: types.CallbackQuery, state: FSMContext, bot: Bot):
+    await message.message.edit_reply_markup()
     await state.clear()
     user = Users_stat(message.from_user.id)
     await user.add_user()
     await message.message.answer("Укажи, пожалуйста, свой пол", reply_markup=gender_keyboard.as_markup())
-    await message.message.delete()
+    # await message.message.delete()
 
 
 @user_router.callback_query(Text(startswith="gender|"))
@@ -420,7 +431,7 @@ async def dinamic_22(message: types.CallbackQuery, state: FSMContext, bot: Bot):
 async def start(message: types.Message, state: FSMContext, bot: Bot):
     await state.clear()
     admin_id = await Admin().get_admins()
-    admin_id = admin_id[1]
+    admin_id = admin_id[0]
     keyboard = InlineKeyboardBuilder()
     keyboard.row(InlineKeyboardButton(text="Ответить пользователю", callback_data=f"admin_answer_user|{message.from_user.id}"))
     await bot.send_message(chat_id=admin_id, text=f"Сообщение от пользователя с id {message.from_user.id}:\n{message.text}",

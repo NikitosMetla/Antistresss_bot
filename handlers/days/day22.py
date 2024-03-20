@@ -18,10 +18,10 @@ day_router22 = Router()
 @day_router22.callback_query(Text(text="confirm|22"), any_state)
 @is_now_day(22)
 async def not_sad_day22(message: CallbackQuery, state: FSMContext, bot: Bot):
-    if int(await Users_stat(message.from_user.id).get_user_day()) == int(message.data.split("|")[1]):
-        await state.clear()
-        await message.message.answer("Давай посмотрим на цель, которую ты поставил вчера. Какие действия нужно предпринять, чтобы достичь её?")
-        await state.set_state(InputMessage.input_answer_state22_1)
+    await message.message.edit_reply_markup()
+    await state.clear()
+    await message.message.answer("Давай посмотрим на цель, которую ты поставил вчера. Какие действия нужно предпринять, чтобы достичь её?")
+    await state.set_state(InputMessage.input_answer_state22_1)
 
 
 @day_router22.message(F.text, InputMessage.input_answer_state22_1)
@@ -130,6 +130,7 @@ async def progress_rating_day22(message: CallbackQuery, state: FSMContext, bot: 
     await FEED_BACK().question5(message.from_user.id, rating)
     await Users().user_self_progress(self_progress=rating, user_id=message.from_user.id)
     await message.message.answer("Любая обратная связь от тебя✍️")
+    await message.message.edit_reply_markup()
     await state.set_state(InputMessage.input_answer_state22_11)
 
 
@@ -202,4 +203,6 @@ async def answer_day22_11(message: types.Message, state: FSMContext, bot: Bot):
 @day_router22.message(Text(text="/contact_us"))
 async def start(message: types.CallbackQuery, state: FSMContext, bot: Bot):
     await state.set_state(InputMessage.connect_us)
-    await message.answer("Введите ваше обращение")
+    keyboard = InlineKeyboardBuilder()
+    keyboard.row(InlineKeyboardButton(text="Отмена", callback_data="cancel_answer"))
+    await message.answer("Введите ваше обращение", reply_markup=keyboard.as_markup())

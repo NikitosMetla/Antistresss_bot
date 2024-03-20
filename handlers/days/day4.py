@@ -16,15 +16,15 @@ day_router4 = Router()
 @day_router4.callback_query(Text(text="confirm|4"), any_state)
 @is_now_day(4)
 async def start_again(message: types.CallbackQuery, state: FSMContext, bot: Bot):
-    if int(await Users_stat(message.from_user.id).get_user_day()) == int(message.data.split("|")[1]):
-        await state.clear()
-        keyboard = InlineKeyboardBuilder()
-        keyboard.row(InlineKeyboardButton(text="Утомление", callback_data="FALSE|4_1"))
-        keyboard.row(InlineKeyboardButton(text="Монотония", callback_data="MONOTON|4_1"))
-        keyboard.row(InlineKeyboardButton(text="Пресыщение", callback_data="FALSE|4_1"))
-        keyboard.row(InlineKeyboardButton(text="Стресс", callback_data="FALSE|4_1"))
-        await state.set_state(InputMessage.input_answer_state4_1)
-        text_variable = """Мы тогда тебе обещали попозже рассказать, что они значат. Рассказываем
+    await message.message.edit_reply_markup()
+    await state.clear()
+    keyboard = InlineKeyboardBuilder()
+    keyboard.row(InlineKeyboardButton(text="Утомление", callback_data="FALSE|4_1"))
+    keyboard.row(InlineKeyboardButton(text="Монотония", callback_data="MONOTON|4_1"))
+    keyboard.row(InlineKeyboardButton(text="Пресыщение", callback_data="FALSE|4_1"))
+    keyboard.row(InlineKeyboardButton(text="Стресс", callback_data="FALSE|4_1"))
+    await state.set_state(InputMessage.input_answer_state4_1)
+    text_variable = """Мы тогда тебе обещали попозже рассказать, что они значат. Рассказываем
         
 Стресс, как ты уже понял — это состояние, которое ты испытываешь, сталкиваясь со сложной и важной для тебя задачей. При этом у тебя возникает желание решить проблему или избавится от неё
 Дада, повторение — мать учения
@@ -40,7 +40,7 @@ async def start_again(message: types.CallbackQuery, state: FSMContext, bot: Bot)
 Дело в том, что стресс часто путают с другими состояниями сниженной работоспособности (к которым и относятся утомление, монотония, психическое пресыщение, стресс и другие). Действительно, по внешним проявлениям эти состояния могут быть очень похожи. Но механизм возникновения разный, а значит и бороться с ними нужно по-разному
     
 Итак, если ты хочешь заняться чем-нибудь поинтереснее, то у тебя"""
-        await message.message.answer(text_variable, reply_markup=keyboard.as_markup())
+    await message.message.answer(text_variable, reply_markup=keyboard.as_markup())
 
 
 @day_router4.callback_query(Text(text="FALSE|4_1"), InputMessage.input_answer_state4_1)

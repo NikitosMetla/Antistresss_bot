@@ -18,17 +18,17 @@ day_router8 = Router()
 @day_router8.callback_query(Text(text="confirm|8"), any_state)
 @is_now_day(8)
 async def start_day8(message: types.CallbackQuery, state: FSMContext, bot: Bot):
-    if int(str(await Users_stat(message.from_user.id).get_user_day())) == int(message.data.split("|")[1]):
-        now = datetime.now()
-        target_time = datetime(now.year, now.month, now.day, 20, 35)
-        if now >= target_time:
-            target_time += timedelta(days=1)
-        time_difference = target_time - now
-        await message.message.answer("Вечером вернемся с расспросами😄")
-        await asyncio.sleep(time_difference.total_seconds())
-        question = await message.message.answer(text="Ну что, как успехи? Что стало причиной стресса сегодня?")
-        await state.set_state(InputMessage.input_answer_state8_1)
-        await state.update_data(question=str(await Users_stat(message.from_user.id).get_user_day()) + ". " + question.text)
+    await message.message.edit_reply_markup()
+    now = datetime.now()
+    target_time = datetime(now.year, now.month, now.day, 20, 35)
+    if now >= target_time:
+        target_time += timedelta(days=1)
+    time_difference = target_time - now
+    await message.message.answer("Вечером вернемся с расспросами😄")
+    await asyncio.sleep(time_difference.total_seconds())
+    question = await message.message.answer(text="Ну что, как успехи? Что стало причиной стресса сегодня?")
+    await state.set_state(InputMessage.input_answer_state8_1)
+    await state.update_data(question=str(await Users_stat(message.from_user.id).get_user_day()) + ". " + question.text)
 
 
 @day_router8.message(F.text, InputMessage.input_answer_state8_1)

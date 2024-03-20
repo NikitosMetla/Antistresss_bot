@@ -17,20 +17,20 @@ day_router21 = Router()
 @day_router21.callback_query(Text(text="confirm|21"), any_state)
 @is_now_day(21)
 async def start_day21(message: CallbackQuery, state: FSMContext, bot: Bot):
-    if int(await Users_stat(message.from_user.id).get_user_day()) == int(message.data.split("|")[1]):
-        await state.clear()
-        await message.message.answer("Первое — мы все разные. Кому-то подойдёт один инструмент, кому-то другой. "
-                                      "Любимый инструмент кого-то не будет работать у другого. Поэтому мы рекомендуем попробовать всё, "
-                                      "а потом оставить для себя всё самое эффективное")
-        await message.message.answer("Второе — важно сформировать намерение. Решить, что ты действительно собираешься следующий месяц "
-                                      "уделить личному стресс-менеджменту, чтобы потом пожинать плоды, чувствуя себя лучше, "
-                                      "продуктивно работая, испытывая меньше стресса и эффективно справляясь с ним")
-        await message.message.answer("Мы считаем, что важно работать сразу над двумя аспектами: и над предупреждением стресса, и над его снижением. "
-                                      "Поэтому давай посмотрим на всё, что нам удалось собрать за время программы")
+    await message.message.edit_reply_markup()
+    await state.clear()
+    await message.message.answer("Первое — мы все разные. Кому-то подойдёт один инструмент, кому-то другой. "
+                                  "Любимый инструмент кого-то не будет работать у другого. Поэтому мы рекомендуем попробовать всё, "
+                                  "а потом оставить для себя всё самое эффективное")
+    await message.message.answer("Второе — важно сформировать намерение. Решить, что ты действительно собираешься следующий месяц "
+                                  "уделить личному стресс-менеджменту, чтобы потом пожинать плоды, чувствуя себя лучше, "
+                                  "продуктивно работая, испытывая меньше стресса и эффективно справляясь с ним")
+    await message.message.answer("Мы считаем, что важно работать сразу над двумя аспектами: и над предупреждением стресса, и над его снижением. "
+                                  "Поэтому давай посмотрим на всё, что нам удалось собрать за время программы")
 
-        question = await message.message.answer("Во-первых, твои основные стрессоры. Выпиши их здесь снова")
-        await state.set_state(InputMessage.input_answer_state21_1)
-        await state.update_data(question=str(await Users_stat(message.from_user.id).get_user_day()) + ". " + question.text)
+    question = await message.message.answer("Во-первых, твои основные стрессоры. Выпиши их здесь снова")
+    await state.set_state(InputMessage.input_answer_state21_1)
+    await state.update_data(question=str(await Users_stat(message.from_user.id).get_user_day()) + ". " + question.text)
 
 
 @day_router21.message(F.text, InputMessage.input_answer_state21_1)

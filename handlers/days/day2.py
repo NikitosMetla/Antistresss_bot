@@ -15,6 +15,7 @@ day_router1 = Router()
 @day_router1.callback_query(Text(text="confirm|1"))
 @is_now_day(1)
 async def start_day1(message: types.CallbackQuery, state: FSMContext, bot: Bot):
+    await message.message.edit_reply_markup()
     await state.clear()
     question = await message.message.answer("Для начала разберёмся, что вообще такое стресс. Что ты понимаешь под стрессом?")
     await state.set_state(InputMessage.input_answer_state1)
