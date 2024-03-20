@@ -60,7 +60,7 @@ async def message_after_start(users_without_end):
             if next_day <= 22:
                 await user_data.edit_user_day(edit_day_stat=False)
                 keyboard = await confirm_keyboard(str(next_day))
-                await bot.send_message(text="Привет) Очень ждали сообщения от тебя вчера, но, видимо, что-то пошло не так :(\n\nДавай пройдем программу дня ещё раз, чтобы закрепить прогресс!n"
+                await bot.send_message(text="Привет) Очень ждали сообщения от тебя вчера, но, видимо, что-то пошло не так :(\n\nДавай пройдем программу дня ещё раз, чтобы закрепить прогресс!\n"
                                             + days_start_questions.get(str(next_day)), chat_id=user, reply_markup=keyboard.as_markup())
         except:
             continue
