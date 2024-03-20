@@ -46,7 +46,7 @@ async def main():
                        day_router7, day_router8, day_router9, day_router10, day_router11, day_router12, day_router13, day_router14,
                        day_router15, day_router16, day_router17, day_router18, day_router19, day_router20, day_router21, day_router22)
     scheduler = AsyncIOScheduler()
-    scheduler.add_job(func=call_next_day, trigger="cron", hour=10, minute=2)
+    scheduler.add_job(func=call_next_day, trigger="cron", hour=10, minute=4)
     scheduler.add_job(func=call_remind_user_day, trigger="cron", hour=18, minute=30)
     scheduler.start()
     await dp.start_polling(bot)
