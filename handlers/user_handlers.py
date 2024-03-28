@@ -42,18 +42,6 @@ async def start(message: types.CallbackQuery, state: FSMContext, bot: Bot):
     await message.message.delete()
 
 
-@user_router.callback_query(Text(startswith="admin_answer_user|"), any_state)
-async def start(message: types.CallbackQuery, state: FSMContext, bot: Bot):
-    data = message.data.split("|")
-    user_id = data[1]
-    message_delete = message.message.message_id
-    await state.set_state(InputMessage.answer_admin_to_user)
-    keyboard = InlineKeyboardBuilder()
-    keyboard.row(InlineKeyboardButton(text="Отмена", callback_data="cancel_answer"))
-    answer = await message.message.answer(f"Ты отвечаешь пользователю с id {user_id}", reply_markup=keyboard.as_markup())
-    await state.update_data(user_id=user_id, message_delete=message_delete, message_id=answer.message_id)
-
-
 @user_router.message(F.text, InputMessage.answer_admin_to_user)
 async def start(message: types.Message, state: FSMContext, bot: Bot):
     data = await state.get_data()
@@ -62,6 +50,7 @@ async def start(message: types.Message, state: FSMContext, bot: Bot):
     message_id = data.get("message_id")
     keyboard = InlineKeyboardBuilder()
     keyboard.row(InlineKeyboardButton(text="Вы ответили", callback_data=f"sqwertyuiop"))
+    await message.reply("Вы ответили пользователю")
     await bot.send_message(chat_id=user_id, text=f"Сообщение от администратора бота:\n{message.text}")
     await bot.edit_message_reply_markup(chat_id=message.from_user.id, message_id=message_delete,
                                         reply_markup=keyboard.as_markup())

@@ -207,3 +207,15 @@ async def start(message: types.Message, state: FSMContext, bot: Bot):
     keyboard.row(InlineKeyboardButton(text="Отмена", callback_data="cancel_answer"))
     answer = await message.answer("Введите ваше обращение", reply_markup=keyboard.as_markup())
     await state.update_data(message_id=answer.message_id)
+
+
+@day_router22.callback_query(Text(startswith="admin_answer_user|"))
+async def start(message: types.CallbackQuery, state: FSMContext, bot: Bot):
+    data = message.data.split("|")
+    user_id = data[1]
+    message_delete = message.message.message_id
+    await state.set_state(InputMessage.answer_admin_to_user)
+    keyboard = InlineKeyboardBuilder()
+    keyboard.row(InlineKeyboardButton(text="Отмена", callback_data="cancel_answer"))
+    answer = await message.message.answer(f"Ты отвечаешь пользователю с id {user_id}", reply_markup=keyboard.as_markup())
+    await state.update_data(user_id=user_id, message_delete=message_delete, message_id=answer.message_id)

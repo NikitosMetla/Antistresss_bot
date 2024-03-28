@@ -18,17 +18,17 @@ class Users_stat:
             "end_LLIC": 0,
             "last_statements": 1,
             "end_statements": 0,
-            "LLIC_results": []
+            "results": []
         }
         await self.save_data()
 
     async def append_LLIC_result(self, result):
-        self.users[self.user_id]["LLIC_results"].append(result)
+        self.users[self.user_id]["results"].append(result)
         await self.save_data()
 
     async def get_LLIC_result(self, user_id):
         user_id = str(user_id)
-        return self.users.get(user_id).get("LLIC_results")
+        return self.users.get(user_id).get("results")
 
     async def edit_user_statements(self):
         self.users[self.user_id]["last_statements"] = int(self.users.get(self.user_id).get("last_statements")) + 1
