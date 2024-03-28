@@ -8,7 +8,6 @@ from aiogram.utils.keyboard import InlineKeyboardBuilder
 
 from db.answers import Answers
 from db.users_stat import Users_stat
-from handlers.user_handlers import start_LLIC
 from settings import InputMessage, sticker_ids
 from utils.is_now_day import is_now_day
 

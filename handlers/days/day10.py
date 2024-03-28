@@ -1,7 +1,7 @@
 import asyncio
 from datetime import datetime, timedelta
 
-from aiogram import types, Dispatcher, Router, F, Bot
+from aiogram import types, Router, F, Bot
 from aiogram.filters import Text
 from aiogram.fsm.context import FSMContext
 from aiogram.fsm.state import any_state

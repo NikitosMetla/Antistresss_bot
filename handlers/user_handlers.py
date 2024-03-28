@@ -4,7 +4,7 @@ from aiogram import Router, types, Bot, F
 from aiogram.filters import Text
 from aiogram.fsm.context import FSMContext
 from aiogram.fsm.state import any_state
-from aiogram.types import BufferedInputFile, InlineKeyboardMarkup, InlineKeyboardButton, FSInputFile
+from aiogram.types import BufferedInputFile, InlineKeyboardButton, FSInputFile
 from aiogram.utils.keyboard import InlineKeyboardBuilder
 
 from db.admins import Admin
@@ -59,11 +59,13 @@ async def start(message: types.Message, state: FSMContext, bot: Bot):
     data = await state.get_data()
     user_id = data.get("user_id")
     message_delete = data.get("message_delete")
+    message_id = data.get("message_id")
     keyboard = InlineKeyboardBuilder()
     keyboard.row(InlineKeyboardButton(text="Вы ответили", callback_data=f"sqwertyuiop"))
     await bot.send_message(chat_id=user_id, text=f"Сообщение от администратора бота:\n{message.text}")
     await bot.edit_message_reply_markup(chat_id=message.from_user.id, message_id=message_delete,
                                         reply_markup=keyboard.as_markup())
+    await bot.delete_message(chat_id=message.from_user.id, message_id=message_id)
     await state.clear()
 
 
@@ -429,9 +431,13 @@ async def dinamic_22(message: types.CallbackQuery, state: FSMContext, bot: Bot):
 
 @user_router.message(F.text, InputMessage.connect_us)
 async def start(message: types.Message, state: FSMContext, bot: Bot):
-    await state.clear()
     admin_id = await Admin().get_admins()
-    admin_id = admin_id[0]
+    admin_id = admin_id[1]
+    data = await state.get_data()
+    await state.clear()
+    message_id = data.get("message_id")
+    await bot.delete_message(chat_id=message.from_user.id, message_id=message_id)
+    await message.answer("Твое сообщение отправлено админу бота!")
     keyboard = InlineKeyboardBuilder()
     keyboard.row(InlineKeyboardButton(text="Ответить пользователю", callback_data=f"admin_answer_user|{message.from_user.id}"))
     await bot.send_message(chat_id=admin_id, text=f"Сообщение от пользователя с id {message.from_user.id}:\n{message.text}",

@@ -1,11 +1,11 @@
 import asyncio
 from datetime import datetime, timedelta
 
-from aiogram import types, Dispatcher, Router, F, Bot
+from aiogram import types, Router, F, Bot
 from aiogram.filters import Text
 from aiogram.fsm.context import FSMContext
 from aiogram.fsm.state import any_state
-from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
+from aiogram.types import InlineKeyboardButton
 from aiogram.utils.keyboard import InlineKeyboardBuilder
 
 from db.answers import Answers
@@ -92,7 +92,7 @@ async def start_day11(message: types.CallbackQuery, state: FSMContext, bot: Bot)
     await message.message.answer("Вечером вернемся с расспросами😄")
     await asyncio.sleep(time_difference.total_seconds())
     question = await message.message.answer(
-        text="Добрый вечер? Ну что там с твоим рабочем местом, что хочешь поменять?")
+        text="Добрый вечер) Ну что там с твоим рабочим местом, что хочешь поменять?")
     await state.set_state(InputMessage.input_answer_state14_4)
     await state.update_data(question=str(await Users_stat(message.from_user.id).get_user_day()) + ". " + question.text)
 

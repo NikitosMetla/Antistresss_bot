@@ -1,5 +1,4 @@
 import asyncio
-from datetime import datetime, timedelta
 
 from aiogram import Dispatcher, Bot
 
@@ -33,11 +32,9 @@ from settings import storage, days_start_questions, bot_token
 
 bot = Bot(token=bot_token, parse_mode="html")
 
-
 async def main():
-    print(await bot.get_me())
     data = await edit_data()
-    await asyncio.sleep(10)
+    await asyncio.sleep(7)
     await message_after_start(data)
     await asyncio.sleep(5)
     await bot.delete_webhook(drop_pending_updates=True)
@@ -60,7 +57,7 @@ async def message_after_start(users_without_end):
             if next_day <= 22:
                 await user_data.edit_user_day(edit_day_stat=False)
                 keyboard = await confirm_keyboard(str(next_day))
-                await bot.send_message(text="Привет) Очень ждали сообщения от тебя вчера, но, видимо, что-то пошло не так :(\n\nДавай пройдем программу дня ещё раз, чтобы закрепить прогресс!\n"
+                await bot.send_message(text="Друзья, всем привет! К сожалению, у нас произошли технические неполадки и мы просим вас пройти последний день заново. Приносим свои извинения за доставленные неудобства 😔\n\n"
                                             + days_start_questions.get(str(next_day)), chat_id=user, reply_markup=keyboard.as_markup())
         except:
             continue
@@ -103,8 +100,10 @@ async def mailing_next_day(next_day: int, user_id, replace: bool, bot: Bot):
                 await user.edit_user_day()
                 keyboard = await confirm_keyboard(str(next_day))
                 await bot.send_message(text=days_start_questions.get(str(next_day)), chat_id=user_id, reply_markup=keyboard.as_markup())
-            elif await user.get_user_day() in [5, 6, 7, 8, 9, 10, 11, 12, 14]:
-                return
+            elif next_day in [5, 6, 7, 8, 9, 10, 11, 12, 14]:
+                await bot.send_message(
+                    text="Привет)Не забудь выполнить задание👐",
+                    chat_id=user_id)
             else:
                 await bot.send_message(text="Мы остановились с тобой на кое-чем интересном! Ответь, пожалуйста, на последний заданный вопрос или продолжи программу!", chat_id=user_id)
     except:

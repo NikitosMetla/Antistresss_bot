@@ -1,4 +1,3 @@
-import asyncio
 import pandas as pd
 
 
@@ -145,12 +144,3 @@ class Users:
 
     async def save_data(self):
         self.users.to_excel('data/users.xlsx')
-
-
-async def main():
-    await Users().add_new_user("23452345")
-
-
-if __name__ == "__main__":
-    asyncio.run(main())
-

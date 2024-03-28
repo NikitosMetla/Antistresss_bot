@@ -1,16 +1,12 @@
-import asyncio
-from datetime import datetime, timedelta
-
-from aiogram import types, Dispatcher, Router, F, Bot
+from aiogram import types, Router, F, Bot
 from aiogram.filters import Text
 from aiogram.fsm.context import FSMContext
 from aiogram.fsm.state import any_state
-from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
+from aiogram.types import InlineKeyboardButton
 from aiogram.utils.keyboard import InlineKeyboardBuilder
 
 from db.answers import Answers
 from db.users_stat import Users_stat
-from handlers.user_handlers import start_LLIC
 from settings import InputMessage, sticker_ids
 from utils.is_now_day import is_now_day
 
@@ -20,7 +16,6 @@ day_router15 = Router()
 @day_router15.callback_query(Text(text="confirm|15"), any_state)
 @is_now_day(15)
 async def start_day15(message: types.CallbackQuery, state: FSMContext, bot: Bot):
-    await message.message.answer("Вечером вернемся с расспросами😄")
     await state.clear()
     question = await message.message.answer("Поговорим о процессуальной стороне твоей деятельности. Задумывался ли ты когда-нибудь о том, как можешь облегчить свою работу? "
                                  "Кажется, что все люди с удовольствием делали бы меньше, но на самом деле большая часть людей выполняет задачи так, как они привыкли это делать, "

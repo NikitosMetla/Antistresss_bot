@@ -1,4 +1,4 @@
-from aiogram import Bot, Dispatcher
+from aiogram import Bot
 from aiogram.fsm.state import StatesGroup, State
 from aiogram.fsm.storage.memory import MemoryStorage
 
@@ -104,7 +104,6 @@ class InputMessage(StatesGroup):
     user_motivation_state = State()
     oprosnik1_state = State()
     statement_user_state = State()
-
     input_answer_state1 = State()
     input_answer_state1_1 = State()
     input_answer_state1_2 = State()

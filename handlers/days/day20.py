@@ -1,9 +1,8 @@
 from aiogram.filters import Text
 from aiogram.fsm.context import FSMContext
 from aiogram.fsm.state import any_state
-from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton, Message, CallbackQuery
+from aiogram.types import InlineKeyboardButton, CallbackQuery
 from aiogram.utils.keyboard import InlineKeyboardBuilder
-from aiogram.utils.markdown import hitalic
 
 from db.answers import Answers
 from handlers.user_handlers import start_LLIC

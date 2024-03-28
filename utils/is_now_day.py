@@ -5,7 +5,6 @@ from aiogram.fsm.context import FSMContext
 
 from aiogram import types, Bot
 
-from db.admins import Admin
 from db.users_stat import Users_stat
 
 

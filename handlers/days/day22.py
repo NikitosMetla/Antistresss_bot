@@ -1,7 +1,7 @@
 from aiogram.filters import Text
 from aiogram.fsm.context import FSMContext
 from aiogram.fsm.state import any_state
-from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup, Message, CallbackQuery
+from aiogram.types import InlineKeyboardButton, CallbackQuery
 from aiogram import types, Bot, F, Router
 from aiogram.utils.keyboard import InlineKeyboardBuilder
 
@@ -201,8 +201,9 @@ async def answer_day22_11(message: types.Message, state: FSMContext, bot: Bot):
 
 
 @day_router22.message(Text(text="/contact_us"))
-async def start(message: types.CallbackQuery, state: FSMContext, bot: Bot):
+async def start(message: types.Message, state: FSMContext, bot: Bot):
     await state.set_state(InputMessage.connect_us)
     keyboard = InlineKeyboardBuilder()
     keyboard.row(InlineKeyboardButton(text="Отмена", callback_data="cancel_answer"))
-    await message.answer("Введите ваше обращение", reply_markup=keyboard.as_markup())
+    answer = await message.answer("Введите ваше обращение", reply_markup=keyboard.as_markup())
+    await state.update_data(message_id=answer.message_id)

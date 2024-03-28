@@ -1,13 +1,13 @@
 from aiogram import Router, types, Bot, F
 from aiogram.filters import Text
 from aiogram.fsm.context import FSMContext
-from aiogram.types import BufferedInputFile, InlineKeyboardButton
+from aiogram.types import InlineKeyboardButton
 from aiogram.utils.keyboard import InlineKeyboardBuilder
 
 from db.answers import Answers
 from db.users_stat import Users_stat
 from handlers.user_handlers import start_LLIC
-from settings import start_text, InputMessage
+from settings import InputMessage
 from utils.is_now_day import is_now_day
 
 day_router2 = Router()
