@@ -219,3 +219,7 @@ async def start(message: types.CallbackQuery, state: FSMContext, bot: Bot):
     keyboard.row(InlineKeyboardButton(text="Отмена", callback_data="cancel_answer"))
     answer = await message.message.answer(f"Ты отвечаешь пользователю с id {user_id}", reply_markup=keyboard.as_markup())
     await state.update_data(user_id=user_id, message_delete=message_delete, message_id=answer.message_id)
+
+@day_router22.callback_query(Text(text="READY_AFTER_MONTH"))
+async def after_month(message: types.CallbackQuery, state: FSMContext, bot: Bot):
+    await start_LLIC(message, state, bot)

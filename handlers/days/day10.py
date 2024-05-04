@@ -62,7 +62,7 @@ async def answer_day10_3(message: types.Message, state: FSMContext, bot: Bot):
     question = data.get("question")
     answers = Answers()
     await answers.add_answer(question=question, answer=message.text, user_id=message.from_user.id)
-    await message.answer("Какие эмоции возникали?")
+    question = await message.answer("Какие эмоции возникали?")
     await state.set_state(InputMessage.input_answer_state10_4)
     await state.update_data(question=str(await Users_stat(message.from_user.id).get_user_day()) + ". " + question.text)
 

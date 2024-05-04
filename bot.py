@@ -1,8 +1,13 @@
 import asyncio
+import datetime
 
 from aiogram import Dispatcher, Bot
+from aiogram.types import InlineKeyboardButton
+from aiogram.utils.keyboard import InlineKeyboardBuilder
 
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
+
+from db.send_month import SendMonth
 from db.users_stat import Users_stat
 from handlers.days.day1 import day_router2
 from handlers.days.day10 import day_router10
@@ -33,11 +38,12 @@ from settings import storage, days_start_questions, bot_token
 bot = Bot(token=bot_token, parse_mode="html")
 
 async def main():
+    print(datetime.datetime.utcnow())
     print(await bot.get_me())
     data = await edit_data()
-    await asyncio.sleep(7)
+    await asyncio.sleep(3)
     await message_after_start(data)
-    await asyncio.sleep(5)
+    await asyncio.sleep(3)
     await bot.delete_webhook(drop_pending_updates=True)
     dp = Dispatcher(storage=storage)
     dp.include_routers(user_router, day_router1, day_router2, day_router3, day_router4, day_router5, day_router6,
@@ -46,8 +52,30 @@ async def main():
     scheduler = AsyncIOScheduler()
     scheduler.add_job(func=call_next_day, trigger="cron", hour=10, minute=4)
     scheduler.add_job(func=call_remind_user_day, trigger="cron", hour=18, minute=30)
+    scheduler.add_job(func=send_reminder, trigger="interval", minutes=5)
     scheduler.start()
+
     await dp.start_polling(bot)
+
+async def send_reminder():
+    tasks = []
+    users = await SendMonth().get_users()
+    for user in users:
+        if (datetime.datetime.utcfromtimestamp(users.get(user).get("timestamp")) + datetime.timedelta(days=30)) <= datetime.datetime.utcnow() and users.get(user).get("send") is False:
+            tasks.append(asyncio.create_task(bot_send_month(chat_id=user)))
+    await asyncio.gather(*tasks)
+
+
+async def bot_send_month(chat_id):
+    try:
+        keyboard = InlineKeyboardBuilder()
+        keyboard.row(InlineKeyboardButton(text="Готов", callback_data="READY_AFTER_MONTH"))
+        await bot.send_message(chat_id=chat_id, text="Привет! Около месяца назад ты закончил проходить нашу программу"
+                                                     " 🤩\nДавай посмотрим, как изменилось твоё состояние? Готов?",
+                               reply_markup=keyboard.as_markup())
+        await SendMonth(chat_id).edit_send()
+    except:
+        return await bot_send_month(chat_id)
 
 
 async def message_after_start(users_without_end):
@@ -58,7 +86,7 @@ async def message_after_start(users_without_end):
             if next_day <= 22:
                 await user_data.edit_user_day(edit_day_stat=False)
                 keyboard = await confirm_keyboard(str(next_day))
-                await bot.send_message(text="Кажется, что-то пошло не так и день ты не закончил…Давай, все-таки, пройдем его сегодня целиком?\n\n"
+                await bot.send_message(text="Кажется, что-то пошло не так и день ты не закончил… Давай, все-таки, пройдем его сегодня целиком?\n\n"
                                             + days_start_questions.get(str(next_day)), chat_id=user, reply_markup=keyboard.as_markup())
         except:
             continue
@@ -72,9 +100,6 @@ async def edit_data():
             users_without_end.append(user)
     for user in users_without_end:
         await Users_stat(user).edit_day_back()
-    # tasks = [asyncio.create_task(Users_stat(users).edit_day_back()) for users in users_data]
-    # await asyncio.gather(*tasks)
-    users_data = await Users_stat().get_users_stat()
     return users_without_end
 
 
