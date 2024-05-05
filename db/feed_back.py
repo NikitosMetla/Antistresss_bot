@@ -62,12 +62,12 @@ class FEED_BACK:
 
     async def question9(self, user_id, answer):
         user_id = int(user_id)
-        self.users.at[user_id, "Что изменилось в твоем поведении?"] = answer
+        self.users.at[user_id, "Что изменилось в твоем поведении?.1"] = answer
         await self.save_data()
 
     async def question10(self, user_id, answer):
         user_id = int(user_id)
-        self.users.at[user_id, "Что изменилось в твоем самоощущении, в том числе в стрессовых ситуациях и после них?"] = answer
+        self.users.at[user_id, "Что изменилось в твоем самоощущении, в том числе в стрессовых ситуациях и после них?.1"] = answer
         await self.save_data()
 
     async def question11(self, user_id, answer):
@@ -77,7 +77,7 @@ class FEED_BACK:
 
     async def question12(self, user_id, answer):
         user_id = int(user_id)
-        self.users.at[user_id, "Любая обратная связь от тебя"] = answer
+        self.users.at[user_id, "Любая обратная связь от тебя.1"] = answer
         await self.save_data()
 
     async def save_data(self):

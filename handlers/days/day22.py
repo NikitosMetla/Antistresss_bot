@@ -163,7 +163,7 @@ async def progress_rating_day22(message: CallbackQuery, state: FSMContext, bot: 
 @is_now_day(22)
 async def answer_day22_11(message: types.Message, state: FSMContext, bot: Bot):
     await FEED_BACK().question8(message.from_user.id, message.text)
-    await message.answer("Что изменилось в твоем самоощущении, в том числе в стрессовых ситуациях и после них?")
+    await message.answer("Что изменилось в твоем поведении?")
     await state.set_state(InputMessage.input_answer_state22_12)
 
 
