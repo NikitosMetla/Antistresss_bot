@@ -2,7 +2,7 @@ from aiogram import Bot
 from aiogram.fsm.state import StatesGroup, State
 from aiogram.fsm.storage.memory import MemoryStorage
 
-bot_token = "7060877189:AAEzlyGcufyVE9BmFGvFLDU03Kb4lztxOtc"
+bot_token = ""
 bot = Bot(token=bot_token, parse_mode="html")
 storage = MemoryStorage()
 
